@@ -6,11 +6,11 @@
 
 ```
 ╔══════════════════════════════════════════════╗
-║   ч и р а к   —   the apprentice framework  ║
+║   ч и р а к   —   the apprentice framework   ║
 ║                                              ║
-║   чирак  →  калфа  →  майстор               ║
-║   chirak →  kalfa  →  maystor               ║
-║  apprentice → journeyman → master           ║
+║   чирак  →  калфа  →  майстор                ║
+║   chirak →  kalfa  →  maystor                ║
+║  apprentice → journeyman → master            ║
 ╚══════════════════════════════════════════════╝
 ```
 
@@ -60,30 +60,30 @@ claude
 ## How It Works
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│  Your Project                                                   │
-│                                                                 │
-│  CLAUDE.md ──────────────────── sets the майстор persona        │
-│                                 Claude does the work, teaches   │
-│                                 the process                     │
-│                                                                 │
-│  .claude/commands/chirak/        slash commands (plugin)        │
-│    ├── brief.md  (/chirak:brief) show lesson objectives         │
-│    ├── check.md  (/chirak:check) evaluate your work             │
-│    ├── hint.md   (/chirak:hint)  prompting tips                 │
-│    ├── next.md   (/chirak:next)  advance to next lesson         │
-│    ├── status.md (/chirak:status)show progress                  │
-│    ├── dive.md   (/chirak:dive)  deep-dive on a concept         │
-│    └── create-course.md          author a new course            │
-│                                                                 │
-│  courses/<course>/               the course you're taking       │
-│    ├── course.yaml               lessons, objectives, evals     │
-│    └── lessons/                                                 │
-│        ├── 01-*/lesson.md                                       │
-│        └── ...                                                  │
-│                                                                 │
-│  .chirak/progress.json           where you are, what you've tried│
-└─────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────────┐
+│  Your Project                                                     │
+│                                                                   │
+│  CLAUDE.md ──────────────────── sets the майстор persona          │
+│                                 Claude does the work, teaches     │
+│                                 the process                       │
+│                                                                   │
+│  .claude/commands/chirak/        slash commands (plugin)          │
+│    ├── brief.md  (/chirak:brief) show lesson objectives           │
+│    ├── check.md  (/chirak:check) evaluate your work               │
+│    ├── hint.md   (/chirak:hint)  prompting tips                   │
+│    ├── next.md   (/chirak:next)  advance to next lesson           │
+│    ├── status.md (/chirak:status)show progress                    │
+│    ├── dive.md   (/chirak:dive)  deep-dive on a concept           │
+│    └── create-course.md          author a new course              │
+│                                                                   │
+│  courses/<course>/               the course you're taking         │
+│    ├── course.yaml               lessons, objectives, evals       │
+│    └── lessons/                                                   │
+│        ├── 01-*/lesson.md                                         │
+│        └── ...                                                    │
+│                                                                   │
+│  .chirak/progress.json           where you are, what you've tried │
+└───────────────────────────────────────────────────────────────────┘
                               │
                               │  Claude Code reads all of this
                               ▼
