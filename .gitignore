@@ -1,6 +1,9 @@
 # Chirak learner state (project-specific, not for repos)
 # .chirak/
 
+# Claude Code worktrees (local only)
+.claude/worktrees/
+
 # OS
 .DS_Store
 Thumbs.db
