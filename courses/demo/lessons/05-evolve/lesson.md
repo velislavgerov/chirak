@@ -1,73 +1,59 @@
 # Lesson 5 — Change Without Fear
 
-This is the lesson where everything comes together.
+You have a working page, deployed, with tests and CI. Now use it.
 
-You have a live page. You have tests. You have CI. Now you're going to make a real change — add something new, improve something that exists — and ship it through the whole pipeline: write, test, push, deploy.
-
-The goal isn't the change itself. The goal is experiencing the confidence that comes from having a safety net. You can change things and know whether you broke something. That's the skill.
+This lesson is about making a real improvement and shipping it safely through the pipeline you built. Then writing down what you learned.
 
 ---
 
 ## What You're Building
 
-A meaningful update to your personal page, shipped through your full pipeline, with a written reflection on what you learned.
+Claude will help you add a meaningful feature or improvement to your personal page — something you actually want on it. You'll push it, watch CI pass, and confirm it's live. Then you'll write a brief reflection: what did you learn doing this project?
 
 ---
 
 ## Objectives
 
-1. **Add a new feature or section to your page**
-   - Something real: a projects section, a contact form, a dark mode toggle, a blog post, a better bio — anything that didn't exist before
-   - It should be visible and intentional
+1. **Choose a feature to add** — something real: a projects section, a contact form, a dark mode toggle, a blog post, an about section. Tell Claude what you want, and Claude will build it.
 
-2. **Verify tests still pass after the change**
-   - Run `npm test` locally before pushing
-   - If the change breaks existing tests, fix them or update them (both are valid)
-   - If the change adds new behavior worth testing, add a test
+2. **Review the changes and request adjustments** — this is your page. Make it look and say what you want.
 
-3. **Deploy the update and confirm it's live**
-   - Push to GitHub
-   - Watch CI pass
-   - Confirm the change is visible at your live URL
+3. **Verify tests still pass** — after the feature is added, run the test suite. If something needs updating, ask Claude to update the tests too.
 
-4. **Write a brief reflection in LEARNINGS.md**
-   - What did you actually learn in this course? Be honest.
-   - What surprised you?
-   - What would you do differently if you started over?
-   - What do you want to learn next?
+4. **Ship it** — push to GitHub. Watch CI pass. Confirm the change is live at your URL.
+
+5. **Write a `LEARNINGS.md`** — ask Claude to help you reflect: what did you understand by the end of this project that you didn't at the start? What would you do differently? What was harder or easier than you expected? Write it honestly — this is for you, not for a grade.
 
 ---
 
 ## What Success Looks Like
 
-When you run `/check`:
-- The deployed site has visible changes (the майстор will ask for your URL and compare)
-- `npm test` passes after your changes
-- `LEARNINGS.md` exists with genuine observations — not a list of what you did, but what you *learned*
+When you run `/chirak:check`, the майстор will check:
 
-The reflection is not a formality. The майстор will read it. Write something true.
+- Is there a visible change on your deployed page compared to Lesson 4?
+- Does the test suite still pass?
+- Does `LEARNINGS.md` exist with honest reflections — not a task list, but something that shows you actually processed what happened?
 
----
-
-## On Refactoring
-
-When you make changes to working code, you're in the domain of refactoring: changing structure without changing behavior. Tests are what make refactoring safe. If they still pass, you haven't broken anything that was working.
-
-This lesson is the practical proof of that idea. Type `/dive "what is refactoring?"` if you want to understand it more deeply.
+The reflection is the most important part of this lesson. What you articulate, you own.
 
 ---
 
-## Completing the Course
+## How to Start
 
-After this lesson, you'll have:
-- Defined, built, and shipped a real project
-- Experienced the full development cycle: define → scaffold → ship → verify → evolve
-- Established habits that experienced developers rely on
+Decide what to add, then tell Claude:
 
-That's the chirak rank: not just writing code, but understanding the process.
+> "Add a projects section to my personal page. It should show 3 project cards with a title, short description, and a link. Use placeholder data for now — I'll fill in real projects later."
+
+Or:
+
+> "I want to add a dark mode toggle to my page. It should remember the preference between visits. Add it and update the tests."
+
+After the feature is working and shipped, write the reflection:
+
+> "Help me write a LEARNINGS.md for this project. Ask me some questions first to help me think through what I actually learned."
 
 ---
 
 ## When You're Ready
 
-Run `/check`. Have your deployed URL and LEARNINGS.md ready.
+Run `/chirak:check`. Share your deployed URL with the changes visible. The майстор will evaluate the feature, the tests, and the reflection.

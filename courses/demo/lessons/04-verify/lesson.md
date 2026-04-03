@@ -1,64 +1,58 @@
 # Lesson 4 — Trust But Verify
 
-Your page is live. Now you want to be able to change it without breaking it.
+You have a live page. Now let's make sure it stays working as you change it.
 
-This lesson is about the most important habit in software development: automated verification. You'll write tests and set up a system that runs them automatically every time you push code. After this lesson, you'll know your page works because a machine checked — not because you remember checking.
+This lesson is about adding automated tests and CI — a system that checks your work every time you push. Claude will write the tests and set up the workflow. Your job is to understand what they're checking and why.
 
 ---
 
 ## What You're Building
 
-A test suite and a CI pipeline. Every push to GitHub will automatically run your tests. You'll know immediately if something broke.
+Claude will add an automated test suite to your project and set up a GitHub Actions CI workflow that runs the tests on every push. By the end of this lesson, you'll have a safety net: push a change, CI runs, you know within a minute whether anything broke.
 
 ---
 
 ## Objectives
 
-1. **Add at least one automated test**
-   - Test something that matters: does your page render? Are key elements present? Do links have `href`s?
-   - Use whatever testing tool fits your stack (Vitest, Playwright, Cypress, Jest, or even a simple Node script)
+1. **Ask Claude to add tests** — describe what you want verified (e.g. "make sure my name appears on the page" or "check that all my nav links exist"). Claude will write tests and explain what each one checks.
 
-2. **Set up CI that runs tests on every push**
-   - Create a GitHub Actions workflow
-   - The workflow should run your tests when you push to main (or any branch)
+2. **Run the tests locally** — confirm they pass. Claude will tell you the command.
 
-3. **Make a change, push it, and verify CI passes**
-   - Modify something on your page
-   - Push to GitHub
-   - Watch the Actions tab — the workflow should run and pass
+3. **Ask Claude to set up CI** — a GitHub Actions workflow that runs the tests on every push. Claude will create the workflow file and explain how it works.
+
+4. **Make a change, push, and watch CI run** — edit something in your page, push to GitHub, and confirm CI passes. This is the loop you'll use for the rest of the course.
 
 ---
 
 ## What Success Looks Like
 
-When you run `/check`:
-- `npm test` (or your equivalent) runs and passes
-- A GitHub Actions workflow file exists in `.github/workflows/`
-- The CI actually ran and passed (the майстор will ask you to confirm)
+When you run `/chirak:check`, the майстор will:
+
+- Run your test suite locally and confirm it passes
+- Check that a CI workflow file exists in `.github/workflows/`
+
+You should be able to explain (briefly) what your tests are checking. Not the code — the intent. "This test verifies my name is on the page. If I accidentally delete the header, this test catches it."
 
 ---
 
-## What to Test?
+## How to Start
 
-For a personal page, useful tests might be:
-- **Render tests**: Does the page render without errors?
-- **Content tests**: Is your name present in the output?
-- **Link tests**: Do the links you care about have correct `href` values?
+Tell Claude what you want to verify about your page:
 
-Don't aim for 100% coverage — aim for the tests that would catch a meaningful break. If your page stopped rendering, would your tests catch it? That's the bar.
+> "Add tests for my personal page. I want to verify that my name 'Velislav Gerov' appears in the header, and that the nav links exist. Use Vitest and Testing Library."
 
-Type `/dive "why test? what to test?"` to go deeper.
+Or if you're not sure what to test:
 
----
+> "Add a basic test suite to my personal page project. What should I be testing at this stage? Explain your choices, then write the tests."
 
-## Setting Up GitHub Actions
+Then, once tests are passing locally:
 
-GitHub Actions is a CI system built into GitHub. You define workflows as YAML files in `.github/workflows/`. When you push, GitHub runs them automatically on their servers.
+> "Set up a GitHub Actions CI workflow that runs my tests on every push to main. Use Node 20."
 
-A workflow that runs your tests needs three things: a trigger (when to run), an environment (what machine to run on), and steps (what to do). Type `/dive "what is CI/CD?"` for a full explanation, or use `/hint` if you're stuck on the syntax.
+Type `/chirak:dive "what is CI/CD?"` to understand what's happening before you set it up.
 
 ---
 
 ## When You're Ready
 
-Run `/check`. Push your code first so CI has a chance to run.
+Run `/chirak:check` and the майстор will verify your test suite and CI configuration.

@@ -1,0 +1,13 @@
+{
+  "name": "chirak",
+  "version": "0.2.0",
+  "description": "Learn to build real projects with AI. A learning framework that turns Claude Code into a guided partner.",
+  "author": {
+    "name": "Velislav Gerov",
+    "email": "vgerov93@gmail.com",
+    "url": "https://gerov.dev"
+  },
+  "repository": "https://github.com/velislavgerov/chirak",
+  "license": "MIT",
+  "keywords": ["learning", "education", "claude-code", "ai-assisted", "developer-tools"]
+}

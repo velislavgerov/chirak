@@ -1,71 +1,68 @@
 # Lesson 4 — Trust But Verify
 
-You have something shipped. Now you need confidence you can keep shipping.
+You have something shipped. Now you need confidence you can keep shipping without breaking it.
 
-This lesson is about building the system that tells you when something breaks. Not you manually checking, not "I think it still works" — a machine that runs your tests every time you push code and tells you the truth.
+This lesson is about adding automated tests and CI — a system that verifies your project's core behavior on every push. Claude will write the tests and set up the workflow. Your job is to understand what they're checking and why.
 
 ---
 
 ## What You're Building
 
-A test suite that verifies your project's core behavior. A CI pipeline that runs those tests automatically on every push.
+Claude will add a test suite that covers your project's core behavior and set up a GitHub Actions CI workflow that runs the tests automatically on every push.
 
 ---
 
 ## Objectives
 
-1. **Add at least one meaningful automated test**
-   - Test the core behavior your project is responsible for
-   - Use whatever testing tool fits your language and stack
-   - One good test beats ten shallow tests
+1. **Tell Claude what to test** — describe the core behavior of your project. Claude will write tests that verify it. Claude will explain what each test checks and what would cause it to fail.
 
-2. **Set up CI that runs tests on every push**
-   - Create a GitHub Actions workflow in `.github/workflows/`
-   - It should run on push (and ideally on pull requests)
-   - It should install dependencies, then run your tests
+2. **Run the tests locally** — confirm they pass. Claude will give you the command.
 
-3. **Make a change, push it, and verify CI passes**
-   - Push any change to GitHub
-   - Go to the Actions tab
-   - Confirm the workflow ran and passed (green check)
+3. **Ask Claude to set up CI** — a GitHub Actions workflow. Claude will create the workflow file and explain how it works.
+
+4. **Push a change and watch CI run** — push anything to GitHub, go to the Actions tab, confirm the workflow ran and passed.
 
 ---
 
 ## What "Meaningful" Means
 
-The test quality check is judgment-based. The question is: **if you broke the core behavior, would this test catch it?**
+The test quality matters, not the test count. The question is: **if you broke the core behavior, would this test catch it?**
 
-For a URL shortener: does the test verify that a URL gets shortened and the short URL redirects to the original?
+For a URL shortener: does the test verify a URL gets shortened and the short URL redirects correctly?
 
 For a CLI formatter: does the test verify that specific input produces the expected formatted output?
 
-For a web app: does the test verify that key elements render? That the main user action works?
+For a web app: does the test verify key content renders and the main user action works?
 
-A test that just imports your module and checks it's defined is not meaningful. A test that exercises real behavior is.
+A test that only imports your module and checks it's defined is not meaningful. A test that exercises real behavior is.
 
-Ask the майстор if you're unsure what to test for your specific project.
+Not sure what to test? Tell Claude what your project does and ask what tests would actually catch bugs in the core logic.
 
 ---
 
 ## What Success Looks Like
 
-When you run `/check`:
-- Your test command runs and passes
-- A GitHub Actions workflow exists
-- You can show the майстор a passing CI run (the green check in the GitHub Actions tab)
-
-The майстор will evaluate whether the test actually tests something meaningful — not count tests, but judge their signal value.
+When you run `/chirak:check`, the майстор will:
+- Run your test command and confirm it passes
+- Check that a GitHub Actions workflow exists in `.github/workflows/`
+- Evaluate whether the tests actually test something meaningful
 
 ---
 
-## A Note on Test-Driven Development
+## How to Start
 
-Some people write tests before the code (TDD). You don't have to. But writing tests *immediately after* the code — while you still remember exactly what the code is supposed to do — is much easier than writing them later.
+Describe your project's core behavior to Claude:
 
-This lesson is your first time setting up testing for this project. Make it count. Tests written now will tell you whether future changes break things.
+> "My project is a hex color converter CLI. The main function takes a hex string like '#ff5733' and returns the RGB equivalent. Add tests that verify the conversion is correct for several inputs, including edge cases like '#000000' and '#ffffff'."
+
+Then, once tests pass:
+
+> "Set up GitHub Actions CI that runs my tests on every push. I'm using Python with pytest."
+
+Type `/chirak:dive "what is CI/CD?"` to understand what's happening before you set it up.
 
 ---
 
 ## When You're Ready
 
-Run `/check`. Push first so CI has a chance to run.
+Run `/chirak:check`. Push to GitHub first so CI has a chance to run.

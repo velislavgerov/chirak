@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# chirak init — installs Chirak skills and course into a project
+# chirak init — installs Chirak commands, skill, and course into a project
 #
 # Usage:
 #   bash <(curl -s https://raw.githubusercontent.com/velislavgerov/chirak/main/scripts/init.sh) demo
@@ -20,7 +20,7 @@ bold()   { printf "\033[1m%s\033[0m\n" "$*"; }
 dim()    { printf "\033[2m%s\033[0m\n" "$*"; }
 
 # Detect whether we're running from a local clone or via curl
-if [[ -f "${BASH_SOURCE[0]%/*}/../skills/chirak/brief.md" ]]; then
+if [[ -f "${BASH_SOURCE[0]%/*}/../commands/brief.md" ]]; then
   CHIRAK_LOCAL_ROOT="$(cd "${BASH_SOURCE[0]%/*}/.." && pwd)"
   LOCAL=true
 else
@@ -59,22 +59,35 @@ dim "Installing course: $COURSE"
 dim "Target: $TARGET"
 echo ""
 
-# ─── copy skills ─────────────────────────────────────────────────────────────
+# ─── copy commands ───────────────────────────────────────────────────────────
 
-SKILLS_DIR="$TARGET/.claude/skills/chirak"
-mkdir -p "$SKILLS_DIR"
+COMMANDS_DIR="$TARGET/.claude/commands/chirak"
+mkdir -p "$COMMANDS_DIR"
 
-SKILLS=(brief check hint next status dive)
+COMMANDS=(brief check hint next status dive create-course)
 
-for skill in "${SKILLS[@]}"; do
+for cmd in "${COMMANDS[@]}"; do
   if [[ "$LOCAL" == true ]]; then
-    cp "$CHIRAK_LOCAL_ROOT/skills/chirak/${skill}.md" "$SKILLS_DIR/${skill}.md"
+    cp "$CHIRAK_LOCAL_ROOT/commands/${cmd}.md" "$COMMANDS_DIR/${cmd}.md"
   else
-    curl -fsSL "$CHIRAK_REPO/skills/chirak/${skill}.md" -o "$SKILLS_DIR/${skill}.md"
+    curl -fsSL "$CHIRAK_REPO/commands/${cmd}.md" -o "$COMMANDS_DIR/${cmd}.md"
   fi
 done
 
-green "✓ Skills installed → .claude/skills/chirak/"
+green "✓ Commands installed → .claude/commands/chirak/"
+
+# ─── copy maystor skill ───────────────────────────────────────────────────────
+
+SKILL_DIR="$TARGET/.claude/skills/maystor"
+mkdir -p "$SKILL_DIR"
+
+if [[ "$LOCAL" == true ]]; then
+  cp "$CHIRAK_LOCAL_ROOT/skills/maystor/SKILL.md" "$SKILL_DIR/SKILL.md"
+else
+  curl -fsSL "$CHIRAK_REPO/skills/maystor/SKILL.md" -o "$SKILL_DIR/SKILL.md"
+fi
+
+green "✓ Skill installed → .claude/skills/maystor/"
 
 # ─── copy course ─────────────────────────────────────────────────────────────
 
@@ -172,7 +185,7 @@ echo "Next steps:"
 echo ""
 echo "  1. cd $TARGET"
 echo "  2. claude"
-echo "  3. /brief"
+echo "  3. /chirak:brief"
 echo ""
 dim "The майстор is waiting."
 echo ""

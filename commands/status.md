@@ -1,11 +1,9 @@
 ---
-name: status
+name: chirak:status
 description: Show overall course progress, rank, and lesson completion
 ---
 
 Read `.chirak/progress.json` and `course.yaml`. Display a clean progress summary.
-
-Show the following:
 
 **Header:**
 ```
@@ -32,7 +30,7 @@ Progress: 2/5 lessons complete
 ```
 
 **Rank indicator** — based on the course's `rank` field:
-- `chirak` → show `чирак → калфа → майстор` with current position highlighted
+- `chirak` → show `чирак → калфа → майстор` with current position marked
 - `kalfa` → show `чирак → ◉ калфа → майстор`
 - `maystor` → show `чирак → калфа → ◉ майстор`
 
@@ -43,6 +41,6 @@ Progress: 2/5 lessons complete
 ╚══════════════════════════════╝
 ```
 
-If `.chirak/progress.json` doesn't exist, tell the learner the course hasn't been initialized and suggest running the init script.
+If `.chirak/progress.json` doesn't exist, the course hasn't been initialized — suggest running the init script.
 
-Keep it tight — this is a quick status check, not a full brief. No prose beyond what's needed to explain the numbers.
+Keep it tight. This is a quick check-in, not a full brief. No prose beyond what's needed.

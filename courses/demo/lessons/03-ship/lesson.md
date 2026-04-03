@@ -1,66 +1,54 @@
 # Lesson 3 — Ship It
 
-Running locally is not shipped. Shipped means someone else can access it.
+Running on your laptop is good. Running on the internet is better. This lesson is about getting your page to a live URL that anyone can visit.
 
-This lesson has one real objective: get your page live on the internet at a URL you can share. Everything else — the platform, the exact deployment method — is up to you.
+Claude will handle the deployment configuration. Your job is to choose a platform, review what Claude sets up, and push the code.
 
 ---
 
 ## What You're Building
 
-Your personal page, live. A real URL. Accessible by anyone.
+Claude will help you push your code to GitHub and deploy it to a hosting platform of your choice. By the end of this lesson, your personal page will be live at a real URL.
 
 ---
 
 ## Objectives
 
-1. **Push your code to a GitHub repository**
-   - Create a GitHub repo for your project
-   - Push your current code
+1. **Push your code to GitHub** — if you don't have a GitHub repo yet, tell Claude to help you set one up. Claude will explain what each step does.
 
-2. **Deploy to a hosting platform**
-   - Choose one: GitHub Pages, Vercel, Cloudflare Pages, Netlify, or similar
-   - Connect your repo to the platform
-   - Trigger a deployment
+2. **Choose a hosting platform** — Vercel, Cloudflare Pages, GitHub Pages, or similar. Tell Claude which one you want (or ask for a recommendation), and Claude will create the deployment configuration.
 
-3. **Access your page at a live URL**
-   - Visit the URL the platform gives you
-   - Confirm your page loads
+3. **Get a live URL** — connect your repo to the platform and trigger a deployment. Paste the URL and confirm the page loads.
 
 ---
 
 ## What Success Looks Like
 
-When you run `/check`:
-- The майстор will ask for your deployed URL
-- You should be able to explain what happened when you deployed — not just "I clicked deploy", but what the platform actually did
-- A deployment configuration file should exist in your repo (a GitHub Actions workflow, `vercel.json`, `wrangler.toml`, or similar)
+When you run `/chirak:check`, the майстор will ask for your deployed URL and check:
 
-Understanding what happened is part of passing. You can look it up, you can ask, you can `/dive "what does deployment mean?"` — but you need to own the explanation.
+- Does the page load at the URL you provide?
+- Does a deployment configuration file exist in your repo (e.g. `vercel.json`, a GitHub Actions workflow, or `wrangler.toml`)?
 
----
-
-## Choosing a Platform
-
-All of these work well for personal pages and have free tiers:
-
-- **GitHub Pages** — simplest if you're already on GitHub. Static files only (no server-side code).
-- **Vercel** — excellent for React/Next.js/Vite projects. One-click deploy from GitHub.
-- **Cloudflare Pages** — fast globally, generous free tier, works with any static framework.
-- **Netlify** — similar to Vercel. Good drag-and-drop deploy if you want to start simple.
-
-Pick one. You can always change later.
+You'll also be asked to briefly explain what happened when you deployed — not in technical detail, but at the level of: "I pushed to GitHub, Vercel detected the push, built the site, and served it at this URL." That understanding is the objective.
 
 ---
 
-## The Git Step
+## How to Start
 
-If you haven't used Git before (or haven't used it much), this is the moment where it becomes real. Git isn't just a backup system — it's a record of every intentional change to your project, and the connection between your local work and the deployed site.
+Tell Claude which platform you want to use:
 
-Type `/dive "what is Git and why version control?"` if you want the full picture.
+> "I want to deploy to Vercel. Help me set up the deployment. I already have a GitHub account."
+
+Or if you want a recommendation:
+
+> "I'm not sure which hosting platform to use for a static HTML/CSS page. What do you recommend and why? Then help me set it up."
+
+Claude will create the necessary config files, tell you exactly what steps to take (the ones that require your credentials or clicks), and explain what's happening.
+
+Type `/chirak:dive "what does deployment actually mean?"` if you want to understand what's happening under the hood before you start.
 
 ---
 
 ## When You're Ready
 
-Run `/check`. Have your deployed URL ready.
+Run `/chirak:check` and share your deployed URL. The майстор will verify it's live.

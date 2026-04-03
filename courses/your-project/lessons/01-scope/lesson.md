@@ -2,66 +2,62 @@
 
 This lesson is a conversation.
 
-Unlike the demo course where the project was pre-defined (a personal page), here you're the one who decides. The майстор's job in this lesson is to help you find something worth building and define it clearly enough to actually build it.
+Unlike the demo course where the project was pre-defined, here you're the one who decides. Tell Claude what you're thinking of building — even a rough idea — and Claude will help you shape it into something scoped, real, and achievable.
 
 ---
 
-## The Conversation
+## What You're Building
 
-Before you write a line of code or create a single file, talk to the майстор. Tell them:
+Claude will help you scope your project and write a `README.md` that defines what you're building, for whom, what it does in version 1, and what technology you'll use.
 
-- **What problem do you want to solve?** It doesn't need to be world-changing. It needs to be real. Something that actually bothers you, or something you actually need.
-- **Who is it for?** Just you? A specific type of person? Anyone?
-- **What's the smallest version that's useful?**
-
-The майстор will ask questions. Answer honestly. This is the scoping process.
-
----
-
-## Red Flags to Watch For
-
-The most common mistake at this stage is scope explosion. Signs:
-
-- "It'll have user accounts, a marketplace, a recommendation engine..."
-- "It's basically like X but better"
-- "Phase 1 is just the MVP, but eventually..."
-
-If you catch yourself thinking these things: **scope down**. What's the one thing at the center of it? Build that. You can always add more.
-
-A good first version solves one problem well. That's it.
+You don't need to have the answer fully formed. The conversation is how you find it.
 
 ---
 
 ## Objectives
 
-After the scoping conversation:
+1. **Tell Claude what you're thinking** — a problem you want to solve, something you've wanted to build, or even just an area you want to explore. Claude will ask questions to help you sharpen it.
 
-1. **Decide what to build** — you and the майстор have agreed on something scoped and real
+2. **Agree on a scope** — you and Claude have aligned on something achievable. A good first version solves one problem well. If it's too broad, Claude will help you cut it down.
 
-2. **Create README.md** with:
+3. **End up with a `README.md`** that contains:
    - A clear problem statement: what problem does this solve, for whom?
-   - 3–5 features for your first version (specific enough to actually build)
-   - Tech stack choice with written rationale: why this stack for this project?
+   - 3–5 features for your first version, specific enough to actually build
+   - A tech stack choice with a brief rationale: why this stack for this project?
 
-3. The README is the deliverable. Write it as if explaining to a skeptical collaborator.
+4. **Review and own the README** — read what Claude wrote, change anything that doesn't sound right, add what's missing. This document is your contract with yourself for what you're building.
 
 ---
 
 ## What Success Looks Like
 
-When you run `/check`, the майстор will read your README and evaluate:
+When you run `/chirak:check`, the майстор will read your README and check:
 
-- Is the problem statement clear? Not "a better way to do X" — but "people who do X currently struggle with Y, which causes Z"
-- Is the scope achievable in an afternoon? (If not, cut.)
+- Is the problem statement clear? Not "a better way to do X" — but "people who do X currently struggle with Y"
+- Is the scope achievable in an afternoon? If not, it needs to be cut.
 - Is the tech stack choice appropriate and justified?
 - Are the features specific enough to build?
 
-**Pass criteria for scope:** you should be able to describe the project in one sentence and have someone understand what it does.
+**Pass criteria for scope:** you should be able to describe the project in one sentence and have someone understand exactly what it does.
 
 ---
 
-## Start Here
+## How to Start
 
-Tell the майстор what you're thinking of building. Don't overthink it — the conversation will help shape it.
+Tell Claude what you have in mind — even rough:
 
-Type `/dive "how to scope a project"` if you want to think through the process first.
+> "I want to build a tool that helps me track my reading. I lose track of books I want to read. Help me scope it and write a README."
+
+Or:
+
+> "I want to build something for my job — I'm a designer and I constantly need to convert hex colors to other formats. Maybe a CLI tool? Help me figure out what to build."
+
+Claude will take it from there — ask questions, suggest scope cuts, and write the README once you've aligned on the shape of the thing.
+
+Type `/chirak:dive "how to scope a project"` if you want to think through the process before starting.
+
+---
+
+## When You're Ready
+
+Run `/chirak:check` and the майстор will evaluate your README.

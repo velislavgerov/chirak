@@ -1,59 +1,60 @@
 # Lesson 1 — What Are We Building?
 
-Every good project starts with a clear answer to that question. Not the code — the *idea*. What is this for? Who is it for? What does it do?
+Before anyone writes a line of code, the best developers ask: what is this actually for? Not the tech — the *idea*. Who is it for? What does it do? What will it say about you?
 
-Today you'll define your personal page before writing a single line of code. This sounds slow. It isn't. Five minutes of thinking now saves an hour of second-guessing later.
+This lesson is about getting that answer out of your head and into a document. Claude will help you do it.
 
 ---
 
 ## What You're Building
 
-A personal page. Yours. Something live on the internet that represents you as a developer.
+Claude will help you write a `README.md` for your personal page — a clear statement of what you're building, for whom, what features it will have, and what technology you'll use to build it.
 
-It can be simple — a name, some links, maybe a short bio. It can be more — projects, a blog, a portfolio. The scope is yours to define. That's the point of this lesson.
+You don't need to have all the answers before you start. That's the point of the conversation.
 
 ---
 
 ## Objectives
 
-1. **Create a README.md** with a clear problem statement
-   - What is this page for?
-   - Who will visit it?
-   - What should they be able to do or find?
+1. **Tell Claude what you're thinking** — even rough ideas, "I want a page with my name and some links" is enough to start. Claude will ask questions and help you shape it.
 
-2. **List 3–5 features** for your personal page
-   - What sections or capabilities will it have?
-   - Be specific enough that you could build each one
+2. **End up with a `README.md`** that contains:
+   - A problem statement: what is this page for, and who will visit it?
+   - 3–5 features for your first version
+   - A tech stack choice with a brief explanation of why you chose it
 
-3. **Choose a tech stack and write why**
-   - What technologies will you use? (HTML/CSS, React, Vue, Astro, etc.)
-   - Why this stack for this project?
-   - What tradeoffs did you consider?
+3. **Review and own the README** — read what Claude wrote, change anything that doesn't sound like you, add anything it missed.
 
 ---
 
 ## What Success Looks Like
 
-Your README.md is the deliverable. When you run `/check`, the майстор will read it and evaluate:
+When you run `/chirak:check`, the майстор will read your `README.md` and check:
 
-- Does it have a clear problem statement?
-- Does it list 3–5 concrete features?
-- Does it name a tech stack with a justification that shows you understand the tradeoffs?
+- Is there a clear problem statement?
+- Are there 3–5 concrete features listed?
+- Is there a tech stack choice with a rationale that shows you understand what you chose?
 
-There's no "right" stack. There is a right kind of reasoning.
+There's no single right answer. There is a right kind of thinking.
 
 ---
 
-## A Note on Choosing Your Stack
+## How to Start
 
-If you already know what you want to use — great, write down why.
+Tell Claude what you have in mind — even a sentence. For example:
 
-If you're unsure: for a personal page, simpler is usually better. HTML and CSS with no build step is a completely valid choice. So is a static site generator like Astro. So is plain React with Vite. The question to ask: will this let me focus on building the page, or will I spend the afternoon fighting configuration?
+> "I want to build a personal page. Help me figure out what to put on it and write a README."
 
-Type `/dive "what is a tech stack?"` if you want to go deeper on this.
+Or if you have more:
+
+> "I want a portfolio page that shows my projects and has a contact section. I'm thinking of using plain HTML and CSS. Help me write a README."
+
+Claude will take it from there.
+
+If you're unsure about tech stacks, type `/chirak:dive "what is a tech stack?"` and Claude will explain the options for your situation.
 
 ---
 
 ## When You're Ready
 
-Run `/check` and the майстор will evaluate your README.
+Run `/chirak:check` and the майстор will evaluate your README.

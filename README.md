@@ -2,7 +2,7 @@
 
 <img src="assets/chirak-logo.png" alt="Chirak logo — pixel art apprentice at a laptop with Bulgarian folk art border" width="400">
 
-> *A set of Claude Code skills that turn Claude into a guided learning partner for developers.*
+> *A Claude Code plugin that turns Claude into a guided partner for learning AI-assisted development.*
 
 ```
 ╔══════════════════════════════════════════════╗
@@ -20,13 +20,40 @@
 
 ## What is this?
 
-Chirak is a set of Claude Code skills and a course format that configures Claude to be a guided learning partner — the **майстор** (master craftsperson) guiding an apprentice through real work.
+Chirak is a Claude Code plugin and course format that teaches you how to build real projects with AI. Claude does the coding — you learn how to direct it effectively: how to break goals into steps, write clear prompts, evaluate output, and ship things.
 
-**There is no CLI to install.** No framework to run. No npm package. Just files that drop into your project and change how Claude behaves inside it.
-
-Courses teach high-level development skills: how to define a project, scaffold it, ship it, verify it works, and evolve it safely. **Claude does the coding** — you learn the process, the decisions, and why things work the way they do.
+**There is no framework to run.** No CLI to install. Just files that drop into your project and change how Claude behaves inside it.
 
 The name comes from the Bulgarian craft guild tradition: **чирак** (chirak, apprentice) works under a **майстор** (maystor, master), progresses to **калфа** (kalfa, journeyman), and eventually earns the title of master through demonstrated skill — not time served.
+
+---
+
+## Installing the Plugin
+
+```bash
+/plugin marketplace add velislavgerov/chirak
+/plugin install chirak@velislavgerov-chirak
+```
+
+Or manually, using the init script:
+
+```bash
+# Demo course — build a personal page
+mkdir my-page && cd my-page
+bash <(curl -s https://raw.githubusercontent.com/velislavgerov/chirak/main/scripts/init.sh) demo
+
+# Your own project
+mkdir my-project && cd my-project
+bash <(curl -s https://raw.githubusercontent.com/velislavgerov/chirak/main/scripts/init.sh) your-project
+```
+
+Then open Claude Code and start:
+
+```bash
+claude
+# then type:
+/chirak:brief
+```
 
 ---
 
@@ -37,15 +64,16 @@ The name comes from the Bulgarian craft guild tradition: **чирак** (chirak,
 │  Your Project                                                   │
 │                                                                 │
 │  CLAUDE.md ──────────────────── sets the майстор persona        │
-│                                 tells Claude to guide, not solve│
+│                                 Claude does the work, teaches   │
+│                                 the process                     │
 │                                                                 │
-│  .claude/skills/chirak/          custom slash commands          │
-│    ├── brief.md  (/brief)        show lesson objectives         │
-│    ├── check.md  (/check)        evaluate your work             │
-│    ├── hint.md   (/hint)         tiered guidance                │
-│    ├── next.md   (/next)         advance to next lesson         │
-│    ├── status.md (/status)       show progress                  │
-│    ├── dive.md   (/dive)         deep-dive on a concept         │
+│  .claude/commands/chirak/        slash commands (plugin)        │
+│    ├── brief.md  (/chirak:brief) show lesson objectives         │
+│    ├── check.md  (/chirak:check) evaluate your work             │
+│    ├── hint.md   (/chirak:hint)  prompting tips                 │
+│    ├── next.md   (/chirak:next)  advance to next lesson         │
+│    ├── status.md (/chirak:status)show progress                  │
+│    ├── dive.md   (/chirak:dive)  deep-dive on a concept         │
 │    └── create-course.md          author a new course            │
 │                                                                 │
 │  courses/<course>/               the course you're taking       │
@@ -65,7 +93,7 @@ The name comes from the Bulgarian craft guild tradition: **чирак** (chirak,
                     └──────────────────┘
 ```
 
-When you open Claude Code in a Chirak project, Claude reads `CLAUDE.md`, `course.yaml`, and `progress.json`. It knows what lesson you're on, what the objectives are, and how to guide you without solving it for you.
+When you open Claude Code in a Chirak project, Claude reads `CLAUDE.md`, `course.yaml`, and `progress.json`. It knows what lesson you're on, what to build with you, and how to teach through doing rather than explaining.
 
 ---
 
@@ -73,19 +101,14 @@ When you open Claude Code in a Chirak project, Claude reads `CLAUDE.md`, `course
 
 ### Option 1 — Demo course (pre-defined project)
 
-Deploy a personal page in ~30 minutes. The project is pre-defined: you're building a personal page. You define the details — what it looks like, what it says, which tech stack.
+Build a personal page in ~30 minutes. The project is pre-defined — a personal page — but you choose the details: what to put on it, which tech stack, how to deploy it.
 
 ```bash
-# Create a new project directory
 mkdir my-page && cd my-page
-
-# Install the demo course
 bash <(curl -s https://raw.githubusercontent.com/velislavgerov/chirak/main/scripts/init.sh) demo
-
-# Open Claude Code and start
 claude
 # then type:
-/brief
+/chirak:brief
 ```
 
 ### Option 2 — Your own project
@@ -97,35 +120,32 @@ mkdir my-project && cd my-project
 bash <(curl -s https://raw.githubusercontent.com/velislavgerov/chirak/main/scripts/init.sh) your-project
 claude
 # then type:
-/brief
+/chirak:brief
 ```
 
 ### Or locally from this repo
 
 ```bash
-# Clone the repo
 git clone https://github.com/velislavgerov/chirak.git
-
-# Install into a new project
 ./chirak/scripts/init.sh demo ./my-page
 cd my-page && claude
 ```
 
 ---
 
-## The Skills
+## The Commands
 
 Once installed, these slash commands are available inside Claude Code:
 
 | Command | What it does |
 |---------|-------------|
-| `/brief` | Show the current lesson's objectives and what success looks like |
-| `/check` | Evaluate your work against the lesson criteria |
-| `/hint` | Conceptual nudge — type `/hint more` for direction, `/hint show` for a scaffold |
-| `/next` | Advance to the next lesson (only after passing `/check`) |
-| `/status` | Show overall progress, lessons completed, hints used |
-| `/dive [concept]` | Deep-dive on a concept, or list available learning moments and references |
-| `/create-course` | Interactive guide for writing a new Chirak course |
+| `/chirak:brief` | Show the current lesson's objectives and what you'll build together |
+| `/chirak:check` | Evaluate your work against the lesson criteria |
+| `/chirak:hint` | Prompting tips — `/chirak:hint more` for direction, `/chirak:hint show` for an example prompt |
+| `/chirak:next` | Advance to the next lesson (only after passing `/chirak:check`) |
+| `/chirak:status` | Show overall progress, lessons completed, hints used |
+| `/chirak:dive [concept]` | Deep-dive on a concept, or list available learning moments and references |
+| `/chirak:create-course` | Interactive guide for writing a new Chirak course |
 
 ---
 
@@ -138,21 +158,21 @@ Once installed, these slash commands are available inside Claude Code:
 Go from zero to a live personal page. The project is pre-defined — a personal page — but you choose the details: what to put on it, which tech stack, how to deploy it.
 
 Five lessons:
-1. **What Are We Building?** — Define the project in writing before touching code
-2. **Get It Running** — Scaffold the project and confirm the dev loop works
-3. **Ship It** — Push to GitHub, deploy to a live URL
-4. **Trust But Verify** — Add a test suite and CI
-5. **Change Without Fear** — Add a feature, run tests, ship the update, reflect
+1. **What Are We Building?** — Tell Claude what you want, Claude writes the README and scopes the project
+2. **Get It Running** — Claude scaffolds the project, you review and request changes
+3. **Ship It** — Claude configures deployment, you connect and push
+4. **Trust But Verify** — Claude writes the tests and CI, you understand what they check
+5. **Change Without Fear** — Claude adds your chosen feature, you ship it and write a reflection
 
 ### `your-project` — Ship Something You Need
 
 **Rank: чирак / chirak**
 
-Same development cycle, but you choose what to build. Lesson 1 is a scoping conversation — Claude helps you find a project that's achievable, real, and worth building. The rest of the lessons adapt to whatever you chose: web app, CLI, API, library, script.
+Same development cycle, but you choose what to build. Lesson 1 is a scoping conversation — Claude helps you find a project that's achievable, real, and worth building. The rest adapts to whatever you chose: web app, CLI, API, library, script.
 
 Five lessons:
 1. **What Are You Going to Build?** — Scoping conversation + README
-2. **Get It Running** — Scaffold for your specific project type
+2. **Get It Running** — Claude scaffolds for your specific project type
 3. **Ship It** — Deploy or publish, in whatever form fits your project
 4. **Trust But Verify** — Tests and CI adapted to your stack
 5. **Change Without Fear** — Improve it, ship it, reflect
@@ -175,7 +195,7 @@ Completing чирак-rank courses unlocks калфа-rank courses (coming soon)
 
 ## Writing a Course
 
-The `/create-course` skill lets you author a new course interactively inside Claude Code. Claude guides you through defining lessons, writing objectives, specifying evaluation criteria, and adding learning moments and references.
+The `/chirak:create-course` command lets you author a new course interactively inside Claude Code. Claude guides you through defining lessons, writing objectives, specifying evaluation criteria, and adding learning moments and references.
 
 See [docs/authoring.md](docs/authoring.md) for the full guide.
 
@@ -185,22 +205,26 @@ See [docs/authoring.md](docs/authoring.md) for the full guide.
 
 ```
 chirak/
-├── skills/                    # The Claude Code skills — this IS the product
-│   └── chirak/
-│       ├── brief.md           # /brief
-│       ├── check.md           # /check
-│       ├── hint.md            # /hint
-│       ├── next.md            # /next
-│       ├── status.md          # /status
-│       ├── dive.md            # /dive
-│       └── create-course.md   # /create-course
+├── .claude-plugin/
+│   └── plugin.json            # Plugin manifest
+├── commands/                  # Claude Code plugin commands
+│   ├── brief.md               # /chirak:brief
+│   ├── check.md               # /chirak:check
+│   ├── hint.md                # /chirak:hint
+│   ├── next.md                # /chirak:next
+│   ├── status.md              # /chirak:status
+│   ├── dive.md                # /chirak:dive
+│   └── create-course.md       # /chirak:create-course
+├── skills/
+│   └── maystor/
+│       └── SKILL.md           # Auto-discovered skill — майстор persona
 ├── courses/
 │   ├── demo/                  # "Your First Ship" — deploy a personal page
 │   └── your-project/          # "Ship Something You Need" — open-ended
 ├── templates/
 │   └── CLAUDE.md              # The майстор persona — copied into learner's project
 ├── scripts/
-│   └── init.sh                # Installs skills + CLAUDE.md into a project
+│   └── init.sh                # Manual install script
 ├── docs/
 │   ├── architecture.md        # How it all fits together
 │   └── authoring.md           # How to write a Chirak course
@@ -219,13 +243,13 @@ The highest-leverage contribution is authoring courses. A good Chirak course:
 - Teaches by doing — every lesson ends with something built
 - Has evaluation criteria that verify real understanding, not just task completion
 - Reads like a craftsperson explaining their art, not like documentation
-- Respects the learner's intelligence — give context, not hand-holding
+- Trusts the learner to direct Claude; teaches the directing, not the coding
 
-Use `/create-course` to get started, or see [docs/authoring.md](docs/authoring.md).
+Use `/chirak:create-course` to get started, or see [docs/authoring.md](docs/authoring.md).
 
-### Improving the Skills
+### Improving the Commands
 
-The skills (`.md` files in `skills/chirak/`) are instructions to Claude. Improving them means better guidance, better evaluation, better hints. Open a PR with your proposed changes and explain what behavior it improves.
+The commands (`commands/*.md`) are instructions to Claude. Improving them means better guidance, better evaluation, better hints. Open a PR with your proposed changes and explain what behavior it improves.
 
 ---
 

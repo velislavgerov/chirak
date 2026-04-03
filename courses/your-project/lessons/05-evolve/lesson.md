@@ -1,82 +1,74 @@
 # Lesson 5 — Change Without Fear
 
-This is the last lesson. It's also the one that teaches the most important thing.
+You have a project. You have tests. You have CI. Now use all of it.
 
-You have a project. You have tests. You have CI. Now use all of it. Make a real improvement to what you've built, ship it safely, and write down what you learned.
-
-The point isn't the improvement itself. The point is experiencing the feeling of making a change and *knowing* whether it broke anything. That feeling — confidence backed by evidence — is the skill this course is really teaching.
+Make a real improvement to what you built, ship it through the full pipeline, and write down what you learned. That's the whole lesson.
 
 ---
 
 ## What You're Building
 
-A meaningful improvement to your project, shipped through your full pipeline. And an honest account of what you learned.
+Claude will help you add a meaningful improvement to your project — a new feature, a significant enhancement, or better error handling. You'll ship it through CI and confirm it's live. Then you'll write an honest reflection on the project.
 
 ---
 
 ## Objectives
 
-1. **Add a meaningful improvement to your project**
-   - Something that adds real value to what you defined in Lesson 1
-   - A new feature, a significant improvement to an existing feature, better error handling, improved performance
-   - Not a README fix, not a comment change — something functional
+1. **Choose an improvement** — something that adds real value to what you defined in Lesson 1. A new feature, a significant improvement to an existing one, better error handling, a usability fix. Tell Claude what you want, and Claude will build it.
 
-2. **Verify tests still pass (update or add tests as needed)**
-   - Run your tests locally before pushing
-   - If the change adds new behavior: add a test for it
-   - If the change breaks an existing test: update the test if the behavior change was intentional, fix the code if it wasn't
+2. **Review the changes** — this is your project. Make sure the implementation matches your intent. Ask Claude to explain any choices you don't understand.
 
-3. **Ship the update through your full pipeline**
-   - Push to GitHub
-   - CI runs
-   - The change is live (deployed, published, or accessible)
+3. **Verify tests still pass** — after the change, run the test suite. Ask Claude to update or add tests as needed for the new behavior.
 
-4. **Write a reflection in LEARNINGS.md**
-   - What did you learn that surprised you?
-   - What would you do differently if you started this project over?
-   - What do you want to learn next?
-   - What does the project need that you didn't have time to build?
+4. **Ship it** — push to GitHub. Watch CI pass. Confirm the change is live.
+
+5. **Write a `LEARNINGS.md`** — ask Claude to help you reflect: what did you understand by the end of this project that you didn't at the start? What would you do differently? What surprised you? What does the project still need?
 
 ---
 
 ## What Success Looks Like
 
-When you run `/check`:
-- The live/published version of your project shows the new feature
-- Tests pass
-- `LEARNINGS.md` exists and is genuine
+When you run `/chirak:check`, the майстор will check:
 
-The майстор will evaluate the reflection carefully. It should contain:
-- At least one thing that surprised you (not "it took longer than I thought")
-- At least one thing you understand now that you didn't before
-- An honest answer to "what would you do differently"
+- Does the live/published version show the new feature?
+- Does the test suite pass?
+- Does `LEARNINGS.md` exist with genuine reflection?
 
-Write something true. Not what sounds like the right answer — what you actually experienced.
+The reflection should contain at least one thing that actually surprised you, one thing you understand now that you didn't before, and an honest answer to "what would you do differently." Not a task list — an account of what you learned.
 
 ---
 
-## On Honest Reflection
+## How to Start
 
-The best engineers have a practice of retrospection: looking back at what they just built and asking hard questions. What did I get right? What did I get wrong? What did I not understand until I was in the middle of it?
+Decide what to add, then tell Claude:
 
-This is a skill you develop, not something that comes naturally. LEARNINGS.md is your first practice of it.
+> "Add error handling to my CLI — if the user passes an invalid hex color, it should print a clear error message and exit with code 1. Add tests for the error cases."
+
+Or:
+
+> "I want to add a --batch flag to my CLI that reads from a file of hex colors and converts them all at once. Implement it and add tests."
+
+After it's built and shipped:
+
+> "Help me write LEARNINGS.md. Ask me questions to help me think through what I actually learned — I don't want it to be generic."
 
 ---
 
 ## Completing This Course
 
-After this lesson, you'll have:
+After this lesson, you've done the full development cycle on a project you chose yourself:
 
-- Scoped and defined a project yourself
-- Built and shipped it
+- Scoped and defined it
+- Scaffolded and ran it locally
+- Shipped it so others can access it
 - Added automated confidence
 - Made a safe change and shipped an update
-- Reflected honestly on the process
+- Reflected honestly on what you learned
 
-That's the chirak rank: the foundation. Not expert-level skill, but the right habits. The development cycle you practiced here — define, scaffold, ship, verify, evolve — is the same one experienced developers use. You've done it once. Now do it again, and again, until it's second nature.
+That's the chirak rank. The same cycle — define, scaffold, ship, verify, evolve — is what experienced developers repeat on everything they build. You've done it once. Now do it again.
 
 ---
 
 ## When You're Ready
 
-Run `/check`. Have your deployed URL or package link ready. Have LEARNINGS.md written.
+Run `/chirak:check`. Have your deployed URL or package link ready, and have LEARNINGS.md written.

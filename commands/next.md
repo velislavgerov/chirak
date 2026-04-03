@@ -1,15 +1,13 @@
 ---
-name: next
+name: chirak:next
 description: Advance to the next lesson after passing the current one
 ---
 
 Read `.chirak/progress.json` to check the current lesson's status.
 
 **If the current lesson is NOT passed:**
-Tell the learner they need to pass the current lesson first. Be specific:
-> "You haven't passed Lesson 2 yet. Run `/check` to see where you stand."
-
-Don't let them skip ahead. The progression is the point.
+Tell the learner they need to pass the current lesson first:
+> "You haven't passed Lesson 2 yet. Run `/chirak:check` to see where you stand."
 
 **If the current lesson IS passed:**
 
@@ -17,9 +15,9 @@ Don't let them skip ahead. The progression is the point.
 2. Update `.chirak/progress.json`:
    - Set `current_lesson` to the next lesson id
    - Set the new lesson's entry to `status: "not_started"`
-3. Show a brief transition message — acknowledge what they just completed, frame what's coming next. One paragraph. Something like:
-   > "You've got a project defined and committed to the idea. Now it's time to make something real. Lesson 3 is about getting your page in front of someone on the internet..."
-4. Tell them to run `/brief` to get the full lesson brief.
+3. Show a brief transition message — acknowledge what they just built, frame what's coming next. One paragraph. Something like:
+   > "You've got a project defined and a clear idea of what you're building. Now it's time to make something real — something running. Lesson 2 is about getting your dev environment working and seeing your page in a browser for the first time..."
+4. Tell them to run `/chirak:brief` to get the full lesson brief.
 
 **If this WAS the last lesson:**
 
@@ -37,7 +35,7 @@ Check the course's `rank` field in `course.yaml`. Generate a completion message:
 ```
 
 Then:
-- Tell them what they've built and what skills they've demonstrated
+- Tell them what they built and what they demonstrated: the full development cycle, end to end.
 - Tell them what comes next (kalfa-rank courses, if defined in course.yaml, or to explore other Chirak courses)
 - Update `progress.json` with `course_status: "completed"` and a completion timestamp
 
