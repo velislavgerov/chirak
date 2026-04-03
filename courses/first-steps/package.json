@@ -1,0 +1,11 @@
+{
+  "name": "@chirak-courses/first-steps",
+  "version": "0.1.0",
+  "description": "Chirak starter course — your first steps as an apprentice",
+  "license": "MIT",
+  "chirak": {
+    "title": "First Steps",
+    "rank": "chirak",
+    "author": "Chirak Contributors"
+  }
+}

@@ -1,0 +1,17 @@
+# First Steps — Chirak starter course
+# This is the format for a Chirak course manifest.
+# TODO: define lessons and objectives
+
+title: First Steps
+rank: chirak
+description: |
+  Your first steps as an apprentice. Learn the basics of working
+  with Chirak and complete your first eval-verified objectives.
+author: Chirak Contributors
+version: "0.1.0"
+
+lessons:
+  # - id: lesson-01
+  #   title: "Hello, Apprentice"
+  #   description: "Your first objective"
+  #   objectives: []
