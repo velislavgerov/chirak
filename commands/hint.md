@@ -10,7 +10,30 @@ The learner has asked for a hint. Check the arguments:
 
 Read the current lesson from `.chirak/progress.json` and `course.yaml`. Read any relevant files already created.
 
-**Tier 1 — Prompting nudge (default)**
+---
+
+## Format
+
+**Header** using unicode box-drawing — show the hint tier clearly:
+```
+┌─── чирак ────────────────────────────────────┐
+│  /hint · Tier 1 of 3 — Prompting nudge       │
+└──────────────────────────────────────────────┘
+```
+Use the actual tier number and name (Tier 1 / Tier 2 / Tier 3).
+
+**The hint content** — see tier guidance below.
+
+**After the hint**, on a new line, show what's available next:
+```
+  → /chirak:hint more   for directional guidance
+  → /chirak:hint show   for an example prompt
+```
+For tier 2, only show the tier 3 option. For tier 3, omit entirely.
+
+---
+
+## Tier 1 — Prompting nudge (default)
 
 Teach them how to ask for what they need. Suggest a more specific or better-framed prompt:
 > "Try asking: 'Create an index.html with a header containing my name and links to GitHub and LinkedIn' — the more specific you are about the content, the closer Claude gets to what you're imagining."
@@ -19,17 +42,17 @@ Teach them how to ask for what they need. Suggest a more specific or better-fram
 
 > "If you're not sure what to ask for, try describing the end state: 'I want to see a local preview of my page in the browser. What do I need to set up?'"
 
-**Tier 2 — Directional guidance (`/chirak:hint more`)**
+## Tier 2 — Directional guidance (`/chirak:hint more`)
 
 Tell them what direction to go — which objective to focus on, what to ask Claude to do next:
 > "You've got the structure. The next step is getting it running locally — ask Claude to add a dev server setup to your project."
 
 > "The deployment config goes in the root of the repo. Ask Claude to create a `vercel.json` or a GitHub Actions workflow for deployment."
 
-**Tier 3 — Example prompt (`/chirak:hint show`)**
+## Tier 3 — Example prompt (`/chirak:hint show`)
 
-Give them a concrete example prompt they can use (or adapt) to move forward:
-> "Here's a prompt that should get you unstuck — you can use this directly or tweak it:"
+Give them a concrete example prompt they can use or adapt:
+> "Here's a prompt that should get you unstuck — use this directly or tweak it:"
 > ```
 > "Add a GitHub Actions CI workflow that runs my tests on every push to main.
 > Use the latest ubuntu runner and Node 20. The test command is npm test."
@@ -37,7 +60,10 @@ Give them a concrete example prompt they can use (or adapt) to move forward:
 
 Make it clear this is an example to adapt, not a formula to follow verbatim.
 
-**After giving the hint:**
+---
+
+## After giving the hint
+
 Update `.chirak/progress.json` to record hint usage:
 ```json
 {
