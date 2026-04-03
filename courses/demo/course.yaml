@@ -1,0 +1,200 @@
+title: "Your First Ship"
+rank: chirak
+description: |
+  Go from zero to a live personal page in 30 minutes.
+  Learn the development cycle: define → scaffold → ship → verify → evolve.
+author: Chirak Contributors
+version: "0.1.0"
+
+references:
+  - title: "MDN Web Docs"
+    url: "https://developer.mozilla.org"
+    note: "The authoritative reference for HTML, CSS, and JavaScript. Come back to this constantly."
+  - title: "Git Handbook"
+    url: "https://guides.github.com/introduction/git-handbook/"
+    note: "Git concepts and commands explained clearly. Read this before Lesson 3."
+  - title: "Vite Getting Started"
+    url: "https://vite.dev/guide/"
+    note: "If you're using a modern JS stack, Vite is the fastest way to get a dev server running."
+  - title: "GitHub Actions Documentation"
+    url: "https://docs.github.com/en/actions"
+    note: "The full reference for CI/CD with GitHub. The quickstart is enough for this course."
+  - title: "Vercel Documentation"
+    url: "https://vercel.com/docs"
+    note: "One-click deploy for frontend projects. The deployment guide covers the essentials."
+  - title: "Cloudflare Pages Documentation"
+    url: "https://developers.cloudflare.com/pages/"
+    note: "Fast global hosting with a generous free tier. Good alternative to Vercel."
+
+lessons:
+  - id: 01-define
+    title: "What Are We Building?"
+    description: "Define your project before touching code"
+    objectives:
+      - "Create a README.md with a clear problem statement"
+      - "List 3-5 features for your personal page"
+      - "Choose a tech stack and write why"
+    evaluation:
+      - type: file_check
+        path: README.md
+        criteria: "Contains a problem statement section, feature list, and tech stack with rationale"
+      - type: judgment
+        criteria: "Tech stack choice is appropriate for a personal page and the rationale shows understanding of tradeoffs"
+    learning_moments:
+      - trigger: "when discussing tech stack options"
+        concept: "What is a tech stack?"
+        depth: brief
+        explanation: "A tech stack is the combination of technologies used to build an application. For a personal page, this might be as simple as HTML+CSS, or could include a framework like React, a build tool like Vite, and a hosting platform."
+        resources:
+          - title: "MDN: Getting started with the web"
+            url: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Your_first_website"
+            note: "Good starting point if this is your first web project"
+          - title: "roadmap.sh — Frontend"
+            url: "https://roadmap.sh/frontend"
+            note: "Visual map of frontend technologies and how they relate"
+
+  - id: 02-scaffold
+    title: "Get It Running"
+    description: "Scaffold the project and see it locally"
+    objectives:
+      - "Initialize the project with your chosen stack"
+      - "See your page running locally in the browser"
+      - "Make one visible change to confirm the dev loop works"
+    evaluation:
+      - type: command
+        run: "npm run dev -- --help 2>/dev/null || npx vite --help 2>/dev/null"
+        criteria: "A dev server command exists and is runnable"
+      - type: file_check
+        path: "index.html OR src/index.html OR src/App.tsx"
+        criteria: "An entry point file exists with custom content (not just boilerplate)"
+    learning_moments:
+      - trigger: "when setting up the dev server"
+        concept: "What is a dev server?"
+        depth: brief
+        explanation: "A dev server runs your project locally and auto-reloads when you change files. It's your inner development loop — the tighter this loop, the faster you iterate."
+        resources:
+          - title: "Vite — Why Vite"
+            url: "https://vite.dev/guide/why.html"
+            note: "Explains what dev servers do and why modern ones are fast"
+      - trigger: "when initializing with npm/pnpm"
+        concept: "What is a package manager?"
+        depth: brief
+        explanation: "Package managers (npm, pnpm, yarn) handle your project's dependencies — code written by others that your project uses. package.json is the manifest that lists them."
+        resources:
+          - title: "npm Documentation"
+            url: "https://docs.npmjs.com/about-npm"
+            note: "Official npm docs — covers packages, package.json, and the registry"
+          - title: "pnpm"
+            url: "https://pnpm.io/motivation"
+            note: "A faster, more efficient alternative to npm"
+
+  - id: 03-ship
+    title: "Ship It"
+    description: "Get your page live on the internet"
+    objectives:
+      - "Push your code to a GitHub repository"
+      - "Deploy to a hosting platform (GitHub Pages, Vercel, Cloudflare Pages, or similar)"
+      - "Access your page at a live URL"
+    evaluation:
+      - type: judgment
+        criteria: "Ask the learner for their deployed URL. Verify the concept of deployment is understood — they should be able to explain what happened when they deployed."
+      - type: file_check
+        path: ".github/workflows/*.yml OR vercel.json OR wrangler.toml"
+        criteria: "A deployment configuration exists"
+    learning_moments:
+      - trigger: "when pushing to GitHub"
+        concept: "What is Git and why version control?"
+        depth: brief
+        explanation: "Git tracks every change to your code. GitHub hosts your git repository online. Together they give you a history of your project, the ability to undo mistakes, and a way to collaborate."
+        resources:
+          - title: "Git Handbook"
+            url: "https://guides.github.com/introduction/git-handbook/"
+            note: "Git concepts and commands — start here if Git is new to you"
+          - title: "GitHub: Hello World"
+            url: "https://docs.github.com/en/get-started/start-your-journey/hello-world"
+            note: "Step-by-step intro to GitHub repos"
+          - title: "Git in 100 seconds (video)"
+            url: "https://www.youtube.com/watch?v=hwP7WQkmECE"
+            note: "Quick visual overview of what Git is doing"
+      - trigger: "when deploying"
+        concept: "What does deployment actually mean?"
+        depth: brief
+        explanation: "Deployment is moving your code from your computer to a server where others can access it. Modern platforms automate this: push to GitHub, platform detects the change, builds your site, serves it at a URL."
+        resources:
+          - title: "Vercel: Deploy a Next.js App"
+            url: "https://vercel.com/docs/frameworks/nextjs"
+            note: "Vercel's quickstart — the concepts apply to any framework"
+          - title: "Cloudflare Pages: Getting Started"
+            url: "https://developers.cloudflare.com/pages/get-started/git-integration/"
+            note: "How to connect a GitHub repo to Cloudflare Pages"
+          - title: "GitHub Pages: Quickstart"
+            url: "https://docs.github.com/en/pages/quickstart"
+            note: "Deploy directly from a GitHub repo — simplest option for static sites"
+
+  - id: 04-verify
+    title: "Trust But Verify"
+    description: "Add confidence that your page works"
+    objectives:
+      - "Add at least one automated test"
+      - "Set up CI that runs tests on every push"
+      - "Make a change, push it, and verify CI passes"
+    evaluation:
+      - type: command
+        run: "npm test 2>/dev/null || npx vitest run 2>/dev/null"
+        criteria: "A test suite exists and passes"
+      - type: file_check
+        path: ".github/workflows/*.yml"
+        criteria: "A CI workflow exists that runs tests"
+    learning_moments:
+      - trigger: "when discussing what to test"
+        concept: "Why test? What to test?"
+        depth: brief
+        explanation: "Tests are automated checks that verify your code works as expected. For a personal page, test that key content renders and links work. Tests catch bugs before your users do."
+        resources:
+          - title: "Vitest — Getting Started"
+            url: "https://vitest.dev/guide/"
+            note: "Fast, modern test runner for JavaScript/TypeScript projects"
+          - title: "Testing Library"
+            url: "https://testing-library.com/docs/"
+            note: "Utilities for testing UI components in a way that resembles how users interact"
+      - trigger: "when setting up CI"
+        concept: "What is CI/CD?"
+        depth: brief
+        explanation: "Continuous Integration (CI) automatically runs your tests on every code change. Continuous Deployment (CD) automatically deploys when tests pass. Together they're your safety net."
+        resources:
+          - title: "GitHub Actions: Quickstart"
+            url: "https://docs.github.com/en/actions/quickstart"
+            note: "Build your first CI workflow in 10 minutes"
+          - title: "GitHub Actions: Workflow syntax reference"
+            url: "https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions"
+            note: "The full reference for .github/workflows/*.yml files"
+
+  - id: 05-evolve
+    title: "Change Without Fear"
+    description: "Make a real change and ship it safely"
+    objectives:
+      - "Add a new feature or section to your page"
+      - "Verify tests still pass after the change"
+      - "Deploy the update and confirm it's live"
+      - "Write a brief reflection: what did you learn?"
+    evaluation:
+      - type: judgment
+        criteria: "The deployed site has visible changes from the previous lesson. The learner can articulate what they changed and why."
+      - type: command
+        run: "npm test"
+        criteria: "Tests still pass after changes"
+      - type: file_check
+        path: "LEARNINGS.md"
+        criteria: "A reflection file exists with genuine observations about the development process"
+    learning_moments:
+      - trigger: "when making changes to existing code"
+        concept: "What is refactoring?"
+        depth: brief
+        explanation: "Refactoring is changing code structure without changing behavior. Tests give you confidence to refactor — if they still pass, you haven't broken anything."
+        resources:
+          - title: "Refactoring Guru"
+            url: "https://refactoring.guru/refactoring/what-is-refactoring"
+            note: "Clear explanation of refactoring with examples"
+          - title: "MDN: CSS refactoring"
+            url: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/CSS_layout/Supporting_Older_Browsers"
+            note: "Practical example of updating code without breaking things"

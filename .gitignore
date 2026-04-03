@@ -1,18 +1,5 @@
-# Dependencies
-node_modules/
-.pnpm-store/
-
-# Build output
-dist/
-*.tsbuildinfo
-
-# Test output
-coverage/
-
-# Environment
-.env
-.env.local
-.env.*.local
+# Chirak learner state (project-specific, not for repos)
+# .chirak/
 
 # OS
 .DS_Store
@@ -26,8 +13,6 @@ Thumbs.db
 
 # Logs
 *.log
-npm-debug.log*
-pnpm-debug.log*
 
 # Temp
 tmp/

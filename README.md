@@ -1,9 +1,8 @@
 # чирак / chirak
 
-<!-- Logo: pixel art, Bulgarian folk art border, pixel apprentice at a laptop -->
-<!-- assets/chirak-logo.png — drop it here once exported -->
+<img src="assets/chirak-logo.png" alt="Chirak logo — pixel art apprentice at a laptop with Bulgarian folk art border" width="400">
 
-> *An open-source framework that turns Claude Code into a guided, objective-driven learning environment for developers.*
+> *A set of Claude Code skills that turn Claude into a guided learning partner for developers.*
 
 ```
 ╔══════════════════════════════════════════════╗
@@ -16,208 +15,198 @@
 ```
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![pnpm](https://img.shields.io/badge/maintained%20with-pnpm-cc00ff.svg)](https://pnpm.io/)
 
 ---
 
 ## What is this?
 
-Chirak is a course framework built on top of Claude Code. Instead of watching videos or reading docs and hoping you understood them, you work directly in your editor with an AI pair — and your progress is verified by **evals**, not self-assessment.
+Chirak is a set of Claude Code skills and a course format that configures Claude to be a guided learning partner — the **майстор** (master craftsperson) guiding an apprentice through real work.
 
-You complete objectives. The framework checks them. You advance.
+**There is no CLI to install.** No framework to run. No npm package. Just files that drop into your project and change how Claude behaves inside it.
+
+Courses teach high-level development skills: how to define a project, scaffold it, ship it, verify it works, and evolve it safely. **Claude does the coding** — you learn the process, the decisions, and why things work the way they do.
 
 The name comes from the Bulgarian craft guild tradition: **чирак** (chirak, apprentice) works under a **майстор** (maystor, master), progresses to **калфа** (kalfa, journeyman), and eventually earns the title of master through demonstrated skill — not time served.
-
----
-
-## The Concept
-
-Most developer education has an honesty problem: you can finish a course without understanding anything, because nothing checks your actual work.
-
-Chirak fixes this with eval-verified objectives:
-
-- Each lesson defines **concrete objectives** — things you must actually build, fix, or explain.
-- A **harness** (currently Claude Code) runs alongside you as a guide and collaborator.
-- When you're ready, you run `chirak check` — the eval suite verifies your work objectively.
-- Pass the evals, advance to the next lesson. That's it.
-
-No fill-in-the-blank exercises. No multiple choice. Real code, real evals, real progression.
 
 ---
 
 ## How It Works
 
 ```
-1. npx chirak init <course>
-   └── Downloads course, sets up workspace, injects harness config
-
-2. chirak start
-   └── Opens your first lesson, brief reads in, objectives appear
-
-3. You work — with Claude Code as your apprentice master
-   └── Ask questions, get hints, explore the codebase, write code
-
-4. chirak check
-   └── Eval suite runs against your work
-   └── Pass → lesson complete, next unlocks
-   └── Fail → specific feedback, try again
-
-5. Complete all lessons → earn your rank badge
+┌─────────────────────────────────────────────────────────────────┐
+│  Your Project                                                   │
+│                                                                 │
+│  CLAUDE.md ──────────────────── sets the майстор persona        │
+│                                 tells Claude to guide, not solve│
+│                                                                 │
+│  .claude/skills/chirak/          custom slash commands          │
+│    ├── brief.md  (/brief)        show lesson objectives         │
+│    ├── check.md  (/check)        evaluate your work             │
+│    ├── hint.md   (/hint)         tiered guidance                │
+│    ├── next.md   (/next)         advance to next lesson         │
+│    ├── status.md (/status)       show progress                  │
+│    ├── dive.md   (/dive)         deep-dive on a concept         │
+│    └── create-course.md          author a new course            │
+│                                                                 │
+│  courses/<course>/               the course you're taking       │
+│    ├── course.yaml               lessons, objectives, evals     │
+│    └── lessons/                                                 │
+│        ├── 01-*/lesson.md                                       │
+│        └── ...                                                  │
+│                                                                 │
+│  .chirak/progress.json           where you are, what you've tried│
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              │  Claude Code reads all of this
+                              ▼
+                    ┌──────────────────┐
+                    │   Claude Code    │
+                    │   (the майстор)  │
+                    └──────────────────┘
 ```
 
-The harness (Claude Code adapter) injects context via `CLAUDE.md`, custom slash commands, and hooks — so your AI assistant always knows which lesson you're on, what the objectives are, and how to guide you without just doing it for you.
-
----
-
-## The Progression System
-
-Chirak borrows its rank structure from Bulgarian craft guilds, where rank was earned through demonstrated mastery — not seniority.
-
-| Rank | Bulgarian | Meaning | What it means here |
-|------|-----------|---------|-------------------|
-| **Apprentice** | чирак / chirak | A beginner who is learning under a master | Foundational courses. You're learning the craft. |
-| **Journeyman** | калфа / kalfa | A skilled worker, no longer a student | Intermediate courses. You can work independently. |
-| **Master** | майстор / maystor | A fully qualified craftsperson | Advanced courses. You can teach others. |
-
-Courses are tagged with a required rank. Completing chirak-rank courses unlocks kalfa-rank courses. Each rank has its own visual identity (badges incoming).
-
----
-
-## Architecture
-
-Chirak is designed as a layered system with a harness-agnostic core:
-
-```
-┌─────────────────────────────────────────────────┐
-│               Course Authoring                  │
-│         (Markdown + YAML + eval specs)          │
-├─────────────────────────────────────────────────┤
-│              @chirak/core                       │
-│   Course loading · eval execution · progress   │
-│              tracking · state management        │
-├─────────────────────────────────────────────────┤
-│         chirak (CLI)   │   future: desktop app  │
-│    init·start·check    │   (Tauri, Phase 2)     │
-├─────────────────────────────────────────────────┤
-│           Harness Adapters                      │
-│  @chirak/harness-claude  │  future: others      │
-│  CLAUDE.md · skills ·    │  (Cursor, Windsurf,  │
-│  hooks · slash commands  │   etc.)              │
-└─────────────────────────────────────────────────┘
-```
-
-**Key design decisions:**
-
-- **`@chirak/core`** has no knowledge of Claude Code — it's a pure library for course mechanics.
-- **Harness adapters** translate core concepts into the target AI environment's native primitives.
-- **Courses** are plain files — Markdown lessons, YAML manifests, TypeScript/shell eval scripts. No magic.
-- The CLI is the primary interface for Phase 1. A desktop app (Phase 2) will wrap it.
-
----
-
-## Course Format
-
-Courses live in the `courses/` directory of any project (or published as npm packages). A minimal course looks like this:
-
-```
-my-course/
-├── course.yaml          # Manifest: title, rank, lessons
-├── lessons/
-│   ├── 01-hello/
-│   │   ├── lesson.md    # The lesson brief — what to learn, what to build
-│   │   ├── eval.ts      # Eval script — verifies objectives programmatically
-│   │   └── starter/     # (optional) starter files for the student
-│   └── 02-next/
-│       └── ...
-└── package.json         # @chirak-courses/my-course
-```
-
-**`course.yaml`** declares lessons and metadata:
-
-```yaml
-title: My Course
-rank: chirak
-description: Learn X by building Y
-
-lessons:
-  - id: 01-hello
-    title: Hello, World
-    description: Your first objective
-    objectives:
-      - Write a function that returns "hello"
-      - The function must be tested
-```
-
-**`eval.ts`** runs programmatic checks:
-
-```typescript
-import { defineEval } from "@chirak/core";
-
-export default defineEval({
-  async check(ctx) {
-    // ctx gives you: file system access, test runner, shell exec
-    const result = await ctx.runTests("src/hello.test.ts");
-    return result.passed;
-  },
-});
-```
-
-**`lesson.md`** is what the student reads — and what the harness injects into Claude Code's context. Write it like a craftsperson explaining a technique, not like a textbook.
+When you open Claude Code in a Chirak project, Claude reads `CLAUDE.md`, `course.yaml`, and `progress.json`. It knows what lesson you're on, what the objectives are, and how to guide you without solving it for you.
 
 ---
 
 ## Quick Start
 
+### Option 1 — Demo course (pre-defined project)
+
+Deploy a personal page in ~30 minutes. The project is pre-defined: you're building a personal page. You define the details — what it looks like, what it says, which tech stack.
+
 ```bash
-# Start a course (installs into current directory)
-npx chirak init first-steps
+# Create a new project directory
+mkdir my-page && cd my-page
 
-# Open your current lesson
-chirak start
+# Install the demo course
+bash <(curl -s https://raw.githubusercontent.com/velislavgerov/chirak/main/scripts/init.sh) demo
 
-# Check your work against the eval suite
-chirak check
+# Open Claude Code and start
+claude
+# then type:
+/brief
+```
 
-# See your progress
-chirak status
+### Option 2 — Your own project
 
-# Advance to the next lesson (after passing evals)
-chirak next
+Start with a conversation. You decide what to build. Claude helps you scope it. The rest of the course adapts to whatever you chose.
+
+```bash
+mkdir my-project && cd my-project
+bash <(curl -s https://raw.githubusercontent.com/velislavgerov/chirak/main/scripts/init.sh) your-project
+claude
+# then type:
+/brief
+```
+
+### Or locally from this repo
+
+```bash
+# Clone the repo
+git clone https://github.com/velislavgerov/chirak.git
+
+# Install into a new project
+./chirak/scripts/init.sh demo ./my-page
+cd my-page && claude
 ```
 
 ---
 
-## Packages
+## The Skills
 
-| Package | Name | Description |
-|---------|------|-------------|
-| `packages/core` | `@chirak/core` | Course loading, eval execution, progress tracking |
-| `packages/cli` | `chirak` | Terminal commands: `init`, `start`, `check`, `next`, `status` |
-| `packages/harness-claude` | `@chirak/harness-claude` | Claude Code adapter: `CLAUDE.md`, skills, hooks |
+Once installed, these slash commands are available inside Claude Code:
+
+| Command | What it does |
+|---------|-------------|
+| `/brief` | Show the current lesson's objectives and what success looks like |
+| `/check` | Evaluate your work against the lesson criteria |
+| `/hint` | Conceptual nudge — type `/hint more` for direction, `/hint show` for a scaffold |
+| `/next` | Advance to the next lesson (only after passing `/check`) |
+| `/status` | Show overall progress, lessons completed, hints used |
+| `/dive [concept]` | Deep-dive on a concept, or list available learning moments and references |
+| `/create-course` | Interactive guide for writing a new Chirak course |
 
 ---
 
-## Roadmap
+## The Courses
 
-### Phase 1 — Core + CLI
-- [ ] `@chirak/core`: course manifest parsing, lesson state machine, eval runner
-- [ ] `chirak` CLI: `init`, `start`, `check`, `next`, `status`
-- [ ] `@chirak/harness-claude`: CLAUDE.md injection, slash commands, hook integration
-- [ ] `first-steps` course: end-to-end example
-- [ ] Course authoring guide
+### `demo` — Your First Ship
 
-### Phase 2 — Desktop App
-- [ ] Tauri-based desktop app wrapping the CLI
-- [ ] Visual progress tracker with rank badges
-- [ ] Course marketplace / registry
-- [ ] Per-lesson hint system with configurable reveal levels
+**Rank: чирак / chirak**
 
-### Phase 3 — Ecosystem
-- [ ] More harness adapters (Cursor, Windsurf, Zed)
-- [ ] Course authoring SDK with eval helpers
-- [ ] Public course registry
-- [ ] Community rank verification (peer review for maystor rank)
-- [ ] API for integrating chirak into coding bootcamps / workshops
+Go from zero to a live personal page. The project is pre-defined — a personal page — but you choose the details: what to put on it, which tech stack, how to deploy it.
+
+Five lessons:
+1. **What Are We Building?** — Define the project in writing before touching code
+2. **Get It Running** — Scaffold the project and confirm the dev loop works
+3. **Ship It** — Push to GitHub, deploy to a live URL
+4. **Trust But Verify** — Add a test suite and CI
+5. **Change Without Fear** — Add a feature, run tests, ship the update, reflect
+
+### `your-project` — Ship Something You Need
+
+**Rank: чирак / chirak**
+
+Same development cycle, but you choose what to build. Lesson 1 is a scoping conversation — Claude helps you find a project that's achievable, real, and worth building. The rest of the lessons adapt to whatever you chose: web app, CLI, API, library, script.
+
+Five lessons:
+1. **What Are You Going to Build?** — Scoping conversation + README
+2. **Get It Running** — Scaffold for your specific project type
+3. **Ship It** — Deploy or publish, in whatever form fits your project
+4. **Trust But Verify** — Tests and CI adapted to your stack
+5. **Change Without Fear** — Improve it, ship it, reflect
+
+---
+
+## The Progression System
+
+Rank is earned through demonstrated work, not time served.
+
+| Bulgarian | Pronunciation | Meaning | What it means here |
+|-----------|--------------|---------|-------------------|
+| **чирак** | chirak | apprentice | Foundational courses. You're learning the craft. |
+| **калфа** | kalfa | journeyman | Intermediate courses. You can work independently. |
+| **майстор** | maystor | master | Advanced courses. You can teach others. |
+
+Completing чирак-rank courses unlocks калфа-rank courses (coming soon).
+
+---
+
+## Writing a Course
+
+The `/create-course` skill lets you author a new course interactively inside Claude Code. Claude guides you through defining lessons, writing objectives, specifying evaluation criteria, and adding learning moments and references.
+
+See [docs/authoring.md](docs/authoring.md) for the full guide.
+
+---
+
+## Repository Structure
+
+```
+chirak/
+├── skills/                    # The Claude Code skills — this IS the product
+│   └── chirak/
+│       ├── brief.md           # /brief
+│       ├── check.md           # /check
+│       ├── hint.md            # /hint
+│       ├── next.md            # /next
+│       ├── status.md          # /status
+│       ├── dive.md            # /dive
+│       └── create-course.md   # /create-course
+├── courses/
+│   ├── demo/                  # "Your First Ship" — deploy a personal page
+│   └── your-project/          # "Ship Something You Need" — open-ended
+├── templates/
+│   └── CLAUDE.md              # The майстор persona — copied into learner's project
+├── scripts/
+│   └── init.sh                # Installs skills + CLAUDE.md into a project
+├── docs/
+│   ├── architecture.md        # How it all fits together
+│   └── authoring.md           # How to write a Chirak course
+└── assets/
+    └── chirak-logo.png
+```
 
 ---
 
@@ -225,20 +214,18 @@ chirak next
 
 ### Writing Courses
 
-The highest-leverage contribution right now is authoring courses. A good chirak course:
+The highest-leverage contribution is authoring courses. A good Chirak course:
 
 - Teaches by doing — every lesson ends with something built
-- Has evals that actually verify the objective, not just "did the file change"
+- Has evaluation criteria that verify real understanding, not just task completion
 - Reads like a craftsperson explaining their art, not like documentation
-- Respects the student's intelligence — give context, not hand-holding
+- Respects the learner's intelligence — give context, not hand-holding
 
-See `courses/first-steps/` for a reference example.
+Use `/create-course` to get started, or see [docs/authoring.md](docs/authoring.md).
 
-### Contributing Code
+### Improving the Skills
 
-Standard GitHub flow: fork, branch, PR. Run `pnpm test` before submitting.
-
-The project is in early scaffolding — see the [roadmap](#roadmap) for where help is most needed.
+The skills (`.md` files in `skills/chirak/`) are instructions to Claude. Improving them means better guidance, better evaluation, better hints. Open a PR with your proposed changes and explain what behavior it improves.
 
 ---
 

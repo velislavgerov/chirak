@@ -1,0 +1,244 @@
+title: "Ship Something You Need"
+rank: chirak
+description: |
+  Build and ship a real project of your own choosing.
+  You define what to build. Chirak guides you through defining it clearly,
+  scaffolding it, shipping it, adding confidence, and evolving it safely.
+
+  Unlike the demo course, this one starts with a conversation.
+author: Chirak Contributors
+version: "0.1.0"
+
+references:
+  - title: "Git Handbook"
+    url: "https://guides.github.com/introduction/git-handbook/"
+    note: "Git concepts and commands — essential for all lessons from Lesson 3 onward."
+  - title: "GitHub Actions Documentation"
+    url: "https://docs.github.com/en/actions"
+    note: "The full reference for CI/CD with GitHub. You'll need this in Lesson 4."
+  - title: "roadmap.sh"
+    url: "https://roadmap.sh"
+    note: "Visual learning paths for backend, frontend, DevOps, and more. Useful for understanding where your project fits."
+  - title: "Choose an Open Source License"
+    url: "https://choosealicense.com"
+    note: "Simple guide to picking a license for your project before you ship it."
+  - title: "Semantic Versioning"
+    url: "https://semver.org"
+    note: "The convention for version numbers (1.2.3). Relevant when publishing packages or making releases."
+
+lessons:
+  - id: 01-scope
+    title: "What Are You Going to Build?"
+    description: "A conversation to find your project and define it clearly enough to build"
+    objectives:
+      - "Decide what to build through a scoping conversation with the майстор"
+      - "Create a README.md with a clear problem statement, target user, and scope"
+      - "List 3-5 features for your first version"
+      - "Choose a tech stack and write why"
+    evaluation:
+      - type: judgment
+        criteria: |
+          Read README.md and evaluate:
+          1. Is the problem statement clear? (What is the problem, for whom?)
+          2. Is the scope achievable in an afternoon? (One focused thing, not a platform)
+          3. Is the tech stack appropriate for this project, and does the rationale show the learner understands the tradeoffs?
+          4. Are the 3-5 features specific enough to actually build?
+
+          Fail if: the scope is too large (a "platform", "marketplace", or "system"), the problem statement is vague ("a better app for X"), or the tech stack choice has no justification.
+    learning_moments:
+      - trigger: "when discussing what to build"
+        concept: "How to scope a project"
+        depth: brief
+        explanation: "Good projects solve one problem well. The skill is ruthless scoping: what is the smallest useful version? If you build that, what have you proven? Start there."
+        resources:
+          - title: "Shape Up: Shaping (Basecamp)"
+            url: "https://basecamp.com/shapeup/1.1-chapter-02"
+            note: "How experienced product teams define work before building it"
+      - trigger: "when choosing a tech stack"
+        concept: "What is a tech stack?"
+        depth: brief
+        explanation: "A tech stack is the combination of technologies you use to build something. Choose based on: what you know (or can learn quickly), what fits the project's needs, and what will let you focus on the problem rather than fighting the tools."
+        resources:
+          - title: "roadmap.sh"
+            url: "https://roadmap.sh"
+            note: "Visual maps of technology stacks by category — good for understanding your options"
+
+  - id: 02-scaffold
+    title: "Get It Running"
+    description: "Set up your project and see it working locally"
+    objectives:
+      - "Initialize the project with your chosen stack"
+      - "See your project running locally"
+      - "Make one visible change to confirm the dev loop works"
+    evaluation:
+      - type: judgment
+        criteria: |
+          Ask the learner to show you their project running locally (they can describe what they see, or paste output).
+          Evaluate: does a working local environment exist? Does the entry point file contain their content, not just unmodified boilerplate?
+          The specific command will vary by project — a web app has a dev server, a CLI tool has a run command, a library has a test command. Evaluate appropriately.
+      - type: file_check
+        path: "package.json OR pyproject.toml OR Cargo.toml OR go.mod OR Makefile"
+        criteria: "A project manifest exists showing the project is initialized"
+    learning_moments:
+      - trigger: "when setting up the project"
+        concept: "What is a dev server?"
+        depth: brief
+        explanation: "Your development loop — the cycle of making a change and seeing the result — is your most important feedback mechanism. Whatever your project type, find the fastest way to see the effect of your changes."
+        resources:
+          - title: "Vite — Why Vite"
+            url: "https://vite.dev/guide/why.html"
+            note: "Explains dev servers well, even if you're not using Vite"
+      - trigger: "when dealing with dependencies"
+        concept: "What is a package manager?"
+        depth: brief
+        explanation: "Package managers (npm, pip, cargo, etc.) handle the code your project depends on. The manifest file (package.json, pyproject.toml, etc.) is the authoritative list of what your project needs."
+        resources:
+          - title: "npm documentation"
+            url: "https://docs.npmjs.com"
+            note: "For JavaScript/Node.js projects"
+          - title: "pip documentation"
+            url: "https://pip.pypa.io/en/stable/"
+            note: "For Python projects"
+          - title: "The Cargo Book"
+            url: "https://doc.rust-lang.org/cargo/"
+            note: "For Rust projects"
+
+  - id: 03-ship
+    title: "Ship It"
+    description: "Get your project live and accessible"
+    objectives:
+      - "Push your code to a GitHub repository"
+      - "Deploy or publish your project so others can access it"
+      - "Verify it works in its deployed form"
+    evaluation:
+      - type: judgment
+        criteria: |
+          This lesson's evaluation adapts to the project type:
+          - Web app/site: Ask for the live URL. Visit it. Does it work?
+          - CLI tool: Ask for the npm/pip/cargo package name. Can it be installed?
+          - API/service: Ask for the base URL. Does a basic request return the expected response?
+          - Library: Is it published to a registry? Or at minimum, is there a GitHub release?
+
+          In all cases: does the learner understand what "deployed" means for their project type? Ask them to explain it.
+      - type: file_check
+        path: ".github/workflows/*.yml OR vercel.json OR wrangler.toml OR Dockerfile OR fly.toml OR railway.toml"
+        criteria: "A deployment or publication configuration exists"
+    learning_moments:
+      - trigger: "when pushing to GitHub"
+        concept: "What is Git and why version control?"
+        depth: brief
+        explanation: "Git gives you a time machine for your code. Every commit is a safe point you can return to. GitHub makes that history accessible to others and to deployment platforms."
+        resources:
+          - title: "Git Handbook"
+            url: "https://guides.github.com/introduction/git-handbook/"
+            note: "Start here if Git is new to you"
+          - title: "Oh Shit, Git!?"
+            url: "https://ohshitgit.com"
+            note: "How to fix the most common Git mistakes — practical and reassuring"
+      - trigger: "when deploying"
+        concept: "What does deployment mean for your project type?"
+        depth: brief
+        explanation: "Deployment means making your project accessible to others. What that looks like depends on what you're building: hosting a web app, publishing a package, running a service, or releasing a binary. The principle is the same — move your code from your machine to somewhere others can use it."
+        resources:
+          - title: "Vercel Documentation"
+            url: "https://vercel.com/docs"
+            note: "For web apps and sites"
+          - title: "Fly.io Documentation"
+            url: "https://fly.io/docs/"
+            note: "For servers, APIs, and Dockerized apps"
+          - title: "Publishing to npm"
+            url: "https://docs.npmjs.com/creating-and-publishing-unscoped-public-packages"
+            note: "For npm packages and CLI tools"
+          - title: "Publishing to PyPI"
+            url: "https://packaging.python.org/en/latest/tutorials/packaging-projects/"
+            note: "For Python packages"
+
+  - id: 04-verify
+    title: "Trust But Verify"
+    description: "Add automated confidence that your project works"
+    objectives:
+      - "Add at least one meaningful automated test"
+      - "Set up CI that runs tests on every push"
+      - "Make a change, push it, and verify CI passes"
+    evaluation:
+      - type: judgment
+        criteria: |
+          Evaluate the test quality — not coverage percentage, but signal value.
+          Does the test verify something that would actually break if the core behavior changed?
+          A test that just imports the module and checks it's defined is not meaningful.
+          A test that calls the main function and asserts on real output is.
+
+          Ask: if you introduced a bug in the core logic, would this test catch it?
+      - type: command
+        run: "npm test 2>/dev/null || python -m pytest 2>/dev/null || cargo test 2>/dev/null || go test ./... 2>/dev/null"
+        criteria: "A test suite exists and passes (will try common test runners)"
+      - type: file_check
+        path: ".github/workflows/*.yml"
+        criteria: "A CI workflow exists that runs tests"
+    learning_moments:
+      - trigger: "when deciding what to test"
+        concept: "What is worth testing?"
+        depth: brief
+        explanation: "Test the core behavior your project is responsible for. If you're building a URL shortener, test that it shortens URLs correctly. If you're building a formatter, test that it formats. Don't test that the framework works — test that your code works."
+        resources:
+          - title: "Vitest — Getting Started"
+            url: "https://vitest.dev/guide/"
+            note: "For JavaScript/TypeScript projects"
+          - title: "pytest documentation"
+            url: "https://docs.pytest.org/en/stable/"
+            note: "For Python projects"
+          - title: "The Rust Book: Testing"
+            url: "https://doc.rust-lang.org/book/ch11-00-testing.html"
+            note: "For Rust projects"
+      - trigger: "when setting up CI"
+        concept: "What is CI/CD?"
+        depth: brief
+        explanation: "CI runs your tests automatically on every push. It turns 'I think this works' into 'the machine verified this works.' CD extends that to automatic deployment when tests pass."
+        resources:
+          - title: "GitHub Actions: Quickstart"
+            url: "https://docs.github.com/en/actions/quickstart"
+            note: "Build your first CI workflow in 10 minutes"
+          - title: "GitHub Actions: Workflow syntax"
+            url: "https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions"
+            note: "Full reference for workflow YAML files"
+
+  - id: 05-evolve
+    title: "Change Without Fear"
+    description: "Extend your project and ship the update safely"
+    objectives:
+      - "Add a meaningful improvement to your project"
+      - "Verify tests still pass (update or add tests as needed)"
+      - "Ship the update through your full pipeline"
+      - "Write a reflection: what did you learn?"
+    evaluation:
+      - type: judgment
+        criteria: |
+          Evaluate whether the change is meaningful — not just a README typo, but something that adds value to the project as originally scoped.
+
+          Also evaluate LEARNINGS.md: is it honest? Does it reflect actual learning, not just a summary of tasks done?
+          Look for: something that surprised them, something they'd do differently, something they understand now that they didn't before.
+
+          Ask the learner to explain the change and why they chose it.
+      - type: command
+        run: "npm test 2>/dev/null || python -m pytest 2>/dev/null || cargo test 2>/dev/null || go test ./... 2>/dev/null"
+        criteria: "Tests pass after the change"
+      - type: file_check
+        path: "LEARNINGS.md"
+        criteria: "A reflection file exists with genuine observations — not a task list"
+    learning_moments:
+      - trigger: "when modifying existing code"
+        concept: "What is refactoring?"
+        depth: brief
+        explanation: "Refactoring is changing code without changing what it does. Tests make refactoring safe. If they still pass, you haven't broken the contract your code makes with the rest of the system."
+        resources:
+          - title: "Refactoring Guru"
+            url: "https://refactoring.guru/refactoring/what-is-refactoring"
+            note: "Clear explanation of refactoring with concrete examples"
+      - trigger: "when the change is bigger than expected"
+        concept: "Scope creep and how to handle it"
+        depth: brief
+        explanation: "Projects grow. That's fine. The skill is noticing when a change is growing beyond what you intended and deciding deliberately: scope it down and ship, or scope up and accept the extra work. Both are valid. Making the choice consciously is the difference."
+        resources:
+          - title: "Shape Up: Appetite"
+            url: "https://basecamp.com/shapeup/1.2-chapter-03"
+            note: "How experienced teams think about scope and time tradeoffs"
