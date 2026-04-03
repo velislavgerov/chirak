@@ -35,24 +35,12 @@ The name comes from the Bulgarian craft guild tradition: **чирак** (chirak,
 /plugin install chirak@velislavgerov-chirak
 ```
 
-Or manually, using the init script:
-
-```bash
-# Demo course — build a personal page
-mkdir my-page && cd my-page
-bash <(curl -s https://raw.githubusercontent.com/velislavgerov/chirak/main/scripts/init.sh) demo
-
-# Your own project
-mkdir my-project && cd my-project
-bash <(curl -s https://raw.githubusercontent.com/velislavgerov/chirak/main/scripts/init.sh) your-project
-```
-
 Then open Claude Code and start:
 
 ```bash
 claude
 # then type:
-/chirak:brief
+/chirak:start
 ```
 
 ---
@@ -105,10 +93,10 @@ Build a personal page in ~30 minutes. The project is pre-defined — a personal 
 
 ```bash
 mkdir my-page && cd my-page
-bash <(curl -s https://raw.githubusercontent.com/velislavgerov/chirak/main/scripts/init.sh) demo
 claude
 # then type:
-/chirak:brief
+/chirak:start
+# pick "Your First Ship" and go
 ```
 
 ### Option 2 — Your own project
@@ -117,18 +105,10 @@ Start with a conversation. You decide what to build. Claude helps you scope it. 
 
 ```bash
 mkdir my-project && cd my-project
-bash <(curl -s https://raw.githubusercontent.com/velislavgerov/chirak/main/scripts/init.sh) your-project
 claude
 # then type:
-/chirak:brief
-```
-
-### Or locally from this repo
-
-```bash
-git clone https://github.com/velislavgerov/chirak.git
-./chirak/scripts/init.sh demo ./my-page
-cd my-page && claude
+/chirak:start
+# pick "Ship Something You Need" and go
 ```
 
 ---
@@ -139,6 +119,7 @@ Once installed, these slash commands are available inside Claude Code:
 
 | Command | What it does |
 |---------|-------------|
+| `/chirak:start` | Pick a course, initialize progress, and show the first lesson brief |
 | `/chirak:brief` | Show the current lesson's objectives and what you'll build together |
 | `/chirak:check` | Evaluate your work against the lesson criteria |
 | `/chirak:hint` | Prompting tips — `/chirak:hint more` for direction, `/chirak:hint show` for an example prompt |
@@ -209,6 +190,7 @@ chirak/
 │   ├── marketplace.json       # Marketplace manifest (this repo is its own marketplace)
 │   └── plugin.json            # Plugin manifest
 ├── commands/                  # Claude Code plugin commands
+│   ├── start.md               # /chirak:start
 │   ├── brief.md               # /chirak:brief
 │   ├── check.md               # /chirak:check
 │   ├── hint.md                # /chirak:hint

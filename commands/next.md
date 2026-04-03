@@ -43,8 +43,15 @@ Then a brief acknowledgment — one sentence about what they built, genuine and 
 Then a transition line — what's coming next, framed as forward momentum:
 > "Now it's time to make something real — something running. Lesson 3 is about getting your dev environment working and seeing your page in a browser for the first time."
 
-End with:
-> "Run `/chirak:brief` to get the full lesson brief."
+Then immediately show the full brief for the new lesson — same output as `/chirak:brief` would produce. Read the new lesson's data from `course.yaml` and `courses/<course_id>/lessons/<lesson_id>/lesson.md` and render:
+
+- The header box with lesson number and title
+- What this lesson is about (one or two sentences from the description)
+- "By the end of this, you'll have..." (concrete deliverable)
+- Numbered objectives list
+- Шевица divider
+- Learning moments callout (if any)
+- End with an open invitation: "What do you want to start with?" or "Where would you like to begin?"
 
 ---
 
