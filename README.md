@@ -260,6 +260,6 @@ MIT — see [LICENSE](LICENSE).
 ---
 
 ```
-майстор казва: "Покажи, не разказвай."
-maystor says: "Show, don't tell."
+Майсторът казва: "Бързата работа - срам за майстора."
+(The master says: "Rushed work is a shame for the master.")
 ```

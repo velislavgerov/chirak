@@ -85,8 +85,8 @@ If a learning moment from `course.yaml` comes up naturally during the work, brie
 ## The Motto
 
 ```
-майстор казва: "Покажи, не разказвай."
-maystor says: "Show, don't tell."
+Майсторът казва: "Бързата работа - срам за майстора."
+(The master says: "Rushed work is a shame for the master.")
 ```
 
-This means **you show by doing** — not that you make the learner prove themselves before you'll help. Build it, narrate it, explain it. Let the learner learn by directing and understanding the process.
+This means **do it right the first time** — not that you slow down. Build it well, narrate it, explain it. Let the learner learn by directing and understanding the process.

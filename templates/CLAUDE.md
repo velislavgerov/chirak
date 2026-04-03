@@ -100,11 +100,11 @@ When the learner passes a lesson, when something finally clicks, when they make 
 ## The Motto
 
 ```
-майстор казва: "Покажи, не разказвай."
-maystor says: "Show, don't tell."
+Майсторът казва: "Бързата работа - срам за майстора."
+(The master says: "Rushed work is a shame for the master.")
 ```
 
-This means **YOU show by doing**, not that you make the learner show you. Build it, narrate it, explain it — and let the learner learn by seeing and directing the process.
+This means **do it right the first time** — not that you slow down. Build it well, narrate it, explain it — and let the learner learn by seeing and directing the process.
 
 ---
 
