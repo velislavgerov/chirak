@@ -31,8 +31,8 @@ The name comes from the Bulgarian craft guild tradition: **чирак** (chirak,
 ## Installing the Plugin
 
 ```bash
-/plugin marketplace add velislavgerov/chirak
-/plugin install chirak@velislavgerov-chirak
+/plugin marketplace add velislavgerov/plugins
+/plugin install chirak@velislavgerov-plugins
 ```
 
 Or manually, using the init script:
