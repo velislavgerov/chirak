@@ -1,0 +1,15 @@
+{
+  "name": "velislavgerov-chirak",
+  "owner": {
+    "name": "Velislav Gerov",
+    "url": "https://gerov.dev"
+  },
+  "plugins": [
+    {
+      "name": "chirak",
+      "source": "./",
+      "description": "An open-source learning framework that turns Claude Code into a guided learning partner.",
+      "version": "0.2.0"
+    }
+  ]
+}

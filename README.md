@@ -31,8 +31,8 @@ The name comes from the Bulgarian craft guild tradition: **чирак** (chirak,
 ## Installing the Plugin
 
 ```bash
-/plugin marketplace add velislavgerov/plugins
-/plugin install chirak@velislavgerov-plugins
+/plugin marketplace add velislavgerov/chirak
+/plugin install chirak@velislavgerov-chirak
 ```
 
 Or manually, using the init script:
@@ -206,6 +206,7 @@ See [docs/authoring.md](docs/authoring.md) for the full guide.
 ```
 chirak/
 ├── .claude-plugin/
+│   ├── marketplace.json       # Marketplace manifest (this repo is its own marketplace)
 │   └── plugin.json            # Plugin manifest
 ├── commands/                  # Claude Code plugin commands
 │   ├── brief.md               # /chirak:brief
