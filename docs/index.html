@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>чирак</title>
+  <meta name="description" content="A Claude Code plugin for learning to build with AI.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    /* ── Variables ────────────────────────────────────────────── */
+    :root {
+      --bg:     #F0EEE6;
+      --text:   #1A1A1A;
+      --border: rgba(26, 26, 26, 0.85);
+      --rule:   rgba(26, 26, 26, 0.10);
+    }
+    :root.dark-mode {
+      --bg:     #1A1A1A;
+      --text:   #F0EEE6;
+      --border: rgba(240, 238, 230, 0.85);
+      --rule:   rgba(240, 238, 230, 0.10);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not(.light-mode) {
+        --bg:     #1A1A1A;
+        --text:   #F0EEE6;
+        --border: rgba(240, 238, 230, 0.85);
+        --rule:   rgba(240, 238, 230, 0.10);
+      }
+    }
+
+    /* ── Reset ────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+    }
+    a:hover { opacity: 0.65; }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875em;
+    }
+
+    /* ── Layout ───────────────────────────────────────────────── */
+    .wrap {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+    @media (max-width: 640px) {
+      .wrap { padding: 48px 24px; }
+    }
+
+    /* ── Theme Toggle ─────────────────────────────────────────── */
+    .theme-toggle {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+    .theme-toggle:hover { opacity: 0.65; }
+    .theme-toggle svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .sun-icon  { display: none; }
+    .moon-icon { display: block; }
+    :root.dark-mode .sun-icon  { display: block; }
+    :root.dark-mode .moon-icon { display: none; }
+    @media (prefers-color-scheme: dark) {
+      :root:not(.light-mode) .sun-icon  { display: block; }
+      :root:not(.light-mode) .moon-icon { display: none; }
+    }
+
+    /* ── Hero ─────────────────────────────────────────────────── */
+    .hero {
+      text-align: center;
+      padding-bottom: 52px;
+    }
+    .hero h1 {
+      font-family: 'Crimson Pro', serif;
+      font-size: 5rem;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 3.5rem; }
+    }
+    .hero .tagline {
+      font-size: 1.0625rem;
+      opacity: 0.6;
+      margin-bottom: 28px;
+    }
+    .hero .init-cmd {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      padding: 10px 20px;
+      border: 1px solid var(--border);
+    }
+
+    /* ── Шевица Divider ───────────────────────────────────────── */
+    .divider {
+      display: block;
+      width: 100%;
+      height: 16px;
+      opacity: 0.16;
+      overflow: hidden;
+    }
+
+    /* ── Section ──────────────────────────────────────────────── */
+    section {
+      padding: 48px 0;
+    }
+    section h2 {
+      font-family: 'Crimson Pro', serif;
+      font-size: 1.375rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 14px;
+    }
+    section p {
+      margin-bottom: 10px;
+    }
+    section p:last-child { margin-bottom: 0; }
+
+    /* ── Steps ────────────────────────────────────────────────── */
+    .steps {
+      list-style: none;
+    }
+    .steps li {
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      gap: 14px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.9375rem;
+      align-items: baseline;
+    }
+    .steps li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .steps .num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      opacity: 0.35;
+    }
+
+    /* ── Install ──────────────────────────────────────────────── */
+    .install {
+      border: 1px solid var(--border);
+      padding: 24px;
+      margin-top: 4px;
+    }
+    .install-note {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      opacity: 0.45;
+      margin-bottom: 12px;
+    }
+    .install code {
+      display: block;
+      font-size: 0.875rem;
+      margin-bottom: 6px;
+    }
+    .install code:last-child { margin-bottom: 0; }
+
+    /* ── Footer ───────────────────────────────────────────────── */
+    footer {
+      padding-top: 40px;
+      padding-bottom: 8px;
+      text-align: center;
+    }
+    .motto {
+      font-family: 'Crimson Pro', serif;
+      font-style: italic;
+      font-size: 1.0625rem;
+      opacity: 0.55;
+      margin-bottom: 20px;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      font-size: 0.8125rem;
+      opacity: 0.45;
+    }
+    .footer-links a { text-decoration: none; }
+    .footer-links a:hover { opacity: 0.8; text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- Shared SVG defs for шевица pattern -->
+  <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+    <defs>
+      <pattern id="folk" x="0" y="0" width="40" height="16" patternUnits="userSpaceOnUse">
+        <line x1="0"  y1="8" x2="11" y2="8" stroke="currentColor" stroke-width="0.75"/>
+        <polygon points="20,2 29,8 20,14 11,8" fill="none" stroke="currentColor" stroke-width="0.75"/>
+        <line x1="29" y1="8" x2="40" y2="8" stroke="currentColor" stroke-width="0.75"/>
+      </pattern>
+    </defs>
+  </svg>
+
+  <button class="theme-toggle" aria-label="Toggle dark mode">
+    <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1"     x2="12" y2="3"/>
+      <line x1="12" y1="21"    x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22"   x2="5.64"  y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1"  y1="12"    x2="3"  y2="12"/>
+      <line x1="21" y1="12"    x2="23" y2="12"/>
+      <line x1="4.22"  y1="19.78" x2="5.64"  y2="18.36"/>
+      <line x1="18.36" y1="5.64"  x2="19.78" y2="4.22"/>
+    </svg>
+    <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+
+  <div class="wrap">
+
+    <!-- Hero -->
+    <header class="hero">
+      <h1>чирак</h1>
+      <p class="tagline">A Claude Code plugin for learning to build with AI.</p>
+      <code class="init-cmd">npx chirak init demo</code>
+    </header>
+
+    <svg class="divider" aria-hidden="true"><rect width="100%" height="100%" fill="url(#folk)"/></svg>
+
+    <!-- What is this -->
+    <section>
+      <h2>What is this?</h2>
+      <p>Chirak is a Claude Code plugin and course format. Claude does the coding — you learn to direct it effectively: how to break goals into steps, write clear prompts, evaluate output, and ship things.</p>
+      <p>Drop it into any project and Claude becomes a guided learning partner. It reads the course, tracks your progress, and evaluates your work honestly. No flattery, no hand-holding past what you've earned.</p>
+      <p>The name comes from the Bulgarian craft guild tradition. <strong>чирак</strong> (chirak) is the apprentice. <strong>калфа</strong> (kalfa) is the journeyman. <strong>майстор</strong> (maystor) is the master. Rank is earned through demonstrated skill — not time served.</p>
+    </section>
+
+    <svg class="divider" aria-hidden="true"><rect width="100%" height="100%" fill="url(#folk)"/></svg>
+
+    <!-- How it works -->
+    <section>
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li><span class="num">1</span><span>Install the plugin in Claude Code.</span></li>
+        <li><span class="num">2</span><span>Run <code>chirak init</code> in your project — drops in CLAUDE.md, skills, and a starter course.</span></li>
+        <li><span class="num">3</span><span>Open Claude Code. It reads the course manifest and becomes the майстор.</span></li>
+        <li><span class="num">4</span><span>Work through lessons. Build real things, commit real code.</span></li>
+        <li><span class="num">5</span><span>Run <code>/check</code> when you're ready. Claude evaluates your work honestly.</span></li>
+      </ol>
+    </section>
+
+    <svg class="divider" aria-hidden="true"><rect width="100%" height="100%" fill="url(#folk)"/></svg>
+
+    <!-- Install -->
+    <section>
+      <h2>Install</h2>
+      <div class="install">
+        <p class="install-note">In Claude Code:</p>
+        <code>/plugin marketplace add velislavgerov/chirak</code>
+        <code>/plugin install chirak@velislavgerov-chirak</code>
+      </div>
+    </section>
+
+    <svg class="divider" aria-hidden="true"><rect width="100%" height="100%" fill="url(#folk)"/></svg>
+
+    <!-- Footer -->
+    <footer>
+      <p class="motto">майстор казва: „Покажи, не разказвай."</p>
+      <div class="footer-links">
+        <a href="https://github.com/velislavgerov/chirak">GitHub</a>
+        <span>MIT</span>
+        <a href="https://gerov.dev">gerov.dev</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var btn  = document.querySelector('.theme-toggle');
+      var saved = localStorage.getItem('chirak-theme');
+      if (saved) {
+        root.classList.add(saved);
+      } else {
+        root.classList.add(window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark-mode' : 'light-mode');
+      }
+      btn.addEventListener('click', function () {
+        var isDark = root.classList.contains('dark-mode');
+        root.classList.remove('dark-mode', 'light-mode');
+        root.classList.add(isDark ? 'light-mode' : 'dark-mode');
+        localStorage.setItem('chirak-theme', isDark ? 'light-mode' : 'dark-mode');
+      });
+    })();
+  </script>
+
+</body>
+</html>
